@@ -12,15 +12,15 @@ const Navbar = () => {
         <details>
           <summary>Interview</summary>
           <ul className="p-2">
-            <li><NavLink to={"/"}>InterPer</NavLink></li>
-            <li><NavLink to={"/"}>Theory</NavLink></li>
-            <li><NavLink to={"/"}>PSol</NavLink></li>
+            <li><NavLink to={"/interview/InterParsonal"}>InterPer</NavLink></li>
+            <li><NavLink to={"/interview/theory"}>Theory</NavLink></li>
+            <li><NavLink to={"/interview/problem-solving"}>PSol</NavLink></li>
           </ul>
         </details>
       </li>
-      <li><NavLink to={'/'}>Note</NavLink></li>
-      <li><NavLink to={'/'}>Code</NavLink></li>
-      <li><NavLink to={'/'}>Link</NavLink></li>
+      <li><NavLink to={'/note'}>Note</NavLink></li>
+      <li><NavLink to={'/code'}>Code</NavLink></li>
+      <li><NavLink to={'/link'}>Link</NavLink></li>
   </>
   return (
     <div className=''>
