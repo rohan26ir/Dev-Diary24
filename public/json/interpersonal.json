@@ -1,0 +1,26 @@
+[
+  {
+    "question": "Tell about yourself",
+    "answer": "I am Mahedul Islam Rohan, a passionate web developer from Savar, Dhaka. Currently, I am pursuing my BSc in Computer Science and Engineering (CSE) at City University.\n\nWith over a year of experience in web development, I specialize in frontend technologies such as HTML, CSS, Tailwind CSS, JavaScript, React.js, and Firebase Authentication. I am also expanding my expertise in backend development, learning Node.js, Express.js, and MongoDB.\n\nI thrive on continuous learning and love turning new knowledge into practical applications. My goal is to work with an organization where I can further enhance my skills and make a positive contribution."
+  },
+  {
+    "question": "What is your career goal?",
+    "answer": "My career goal is to become a skilled and experienced full-stack developer. Currently, I am skilled in frontend development, but I am also learning about backend technologies. My goal is to work in an organization where I can learn new technologies and improve myself further.\n\nShort-term goal: Looking for a job opportunity where I can use my skills and learn teamwork.\nLong-term goal: To become a skilled and experienced full-stack developer."
+  },
+  {
+    "question": "Why do you want to work?",
+    "answer": "I am at the beginning of my career and want to work in an organization where I can learn, apply my skills, and contribute to the growth of the company."
+  },
+  {
+    "question": "Why should I hire you?",
+    "answer": "I am an energetic and creative frontend developer who focuses on user experience and website performance rather than just writing code.\n\nI am proficient in modern technologies like React.js, Tailwind CSS, and Firebase Authentication and have the ability to learn new things quickly.\n\nI can contribute to improving quality coding standards and performance in your company’s projects."
+  },
+  {
+    "question": "What are your weaknesses?",
+    "answer": "I sometimes get so excited about new technologies that I try to learn too many things at once, which sometimes makes me lose focus. But now, I am focusing on learning in-depth on specific topics.\n\nI am very dedicated to work, which sometimes puts too much pressure on me. However, I am now working on maintaining time management and work-life balance."
+  },
+  {
+    "question": "Why do you want to work for our company?",
+    "answer": "I have seen that your company encourages new technologies and creative work. I want to work for an organization that offers opportunities for teamwork and continuous learning. I believe that by working for your company, I will be able to further enhance my skills and solve real-world problems."
+  }
+]

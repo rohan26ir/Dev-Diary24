@@ -10,6 +10,9 @@ import LinkPage from "../pages/Link/LinkPage";
 import InterParsonal from "../pages/Interview/InterParsonal/InterParsonal";
 import Theory from "../pages/Interview/Theory/Theory";
 import ProblemSolving from "../pages/Interview/PSol/ProblemSolving";
+import SignIn from "../Account/SignIn/SignIn";
+import SignUp from "../Account/SignUp/SignUp";
+import Account from "../Account/Account";
 
 
 const Router = createBrowserRouter([
@@ -21,6 +24,20 @@ const Router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage></HomePage>
+      },
+      {
+        path: "/account",
+        element: <Account></Account>,
+        children: [
+          {
+            path: "SignIn",
+            element: <SignIn></SignIn>
+          },
+          {
+            path: "SignUp",
+            element: <SignUp></SignUp>
+          },
+        ]
       },
       {
         path: "/interview/InterParsonal",

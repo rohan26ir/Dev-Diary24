@@ -2,8 +2,9 @@ import React from 'react';
 
 const LinkPage = () => {
   return (
-    <div>
-      
+    <div className=''>
+      <div>
+      </div>
     </div>
   );
 };
