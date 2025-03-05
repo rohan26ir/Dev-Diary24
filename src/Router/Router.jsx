@@ -67,18 +67,19 @@ const Router = createBrowserRouter([
         path: "/link",
         element: <LinkPage></LinkPage>
       },
-      {
-        path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-        children: [
-          {
-            path: "addTask",
-            element: <AddTasks></AddTasks>
-          }
-        ]
-      }
+      
     ]
     
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <AddTasks></AddTasks>
+      }
+    ]
   },
 ]);
 

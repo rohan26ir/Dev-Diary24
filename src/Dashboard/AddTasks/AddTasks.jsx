@@ -72,7 +72,8 @@ const AddTasks = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className=''>
+      <div className="max-w-3xl mx-auto p-6  ">
       <h2 className="text-2xl font-bold mb-6">Add New Task</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="form-control">
@@ -194,6 +195,7 @@ const AddTasks = () => {
       </form>
 
       {message && <p className="mt-4 text-center text-lg">{message}</p>}
+    </div>
     </div>
   );
 };
