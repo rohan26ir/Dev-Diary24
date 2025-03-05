@@ -15,6 +15,8 @@ import SignUp from "../Account/SignUp/SignUp";
 import Account from "../Account/Account";
 import Dashboard from "../Dashboard/Dashboard";
 import AddTasks from "../Dashboard/AddTasks/AddTasks";
+import PrivateRoute from "./PrivateRoute";
+import { Home } from "lucide-react";
 
 
 const Router = createBrowserRouter([

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaMagic, FaChevronDown } from "react-icons/fa";
 
+import FAQimage from "../../../assets/Interpersonal.svg"
+
 const InterPersonal = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const [faqs, setFaqs] = useState([]); // State to store fetched data
@@ -17,7 +19,7 @@ const InterPersonal = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top on page load
 
-    fetch("/public/json/Interpersonal.json")
+    fetch("/interpersonal.json")
       .then((res) => {
         console.log("Response:", res);
         if (!res.ok) {
@@ -33,7 +35,7 @@ const InterPersonal = () => {
     <div className=" bg-white text-black px-28 py-2">
       <div className="flex items-center justify-center gap-2 border-2 rounded-lg mb-2">
         <div className="flex justify-center">
-          <img src="/src/assets/Interpersonal.svg" alt="" className="w-full h-52 object-top" />
+          <img src={FAQimage} alt="" className="w-full h-52 object-top" />
         </div>
 
         <div>

@@ -5,6 +5,7 @@ import moment from "moment";
 const ShowTasks = () => {
   const axiosSecure = useAxiosSecure();
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -12,7 +13,11 @@ const ShowTasks = () => {
       setTasks((prevTasks) =>
         prevTasks.map((task) => ({
           ...task,
-          remainingTime: calculateRemainingTime(task.startDateTime, task.endDateTime, task.status),
+          remainingTime: calculateRemainingTime(
+            task.startDateTime,
+            task.endDateTime,
+            task.status
+          ),
         }))
       );
     }, 1000);
@@ -22,21 +27,22 @@ const ShowTasks = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axiosSecure.get("/tasks");
-      const updatedTasks = res.data.map((task) => ({
-        ...task,
-        remainingTime: calculateRemainingTime(task.startDateTime, task.endDateTime, task.status),
-      }));
-      setTasks(updatedTasks);
+      const res = await axiosSecure.get("/tasks", { withCredentials: true });
+      setTasks(res.data); // The fetched tasks will only be from the logged-in user
     } catch (error) {
       console.error("Error fetching tasks:", error);
+      setError("Failed to fetch tasks. Please try again later.");
     }
   };
 
   const updateStatus = async (id, status) => {
     try {
       await axiosSecure.patch(`/tasks/${id}/status`, { status });
-      fetchTasks(); // Refresh tasks after update
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === id ? { ...task, status } : task
+        )
+      );
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -69,8 +75,9 @@ const ShowTasks = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-6">
+    <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4">Your Tasks</h2>
+      {error && <p className="text-red-500">{error}</p>}
 
       {Object.entries(groupedTasks).map(([status, taskList]) => (
         <div key={status} className="mb-6">

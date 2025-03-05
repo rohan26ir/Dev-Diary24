@@ -20,9 +20,9 @@ const Navbar = () => {
       </NavLink>
     </li>
     <li>
-      <details>
-        <summary>Interview</summary>
-        <ul className="p-2">
+      <details className=''>
+        <summary className=''>Interview</summary>
+        <ul className="p-2 text-black">
           <li>
             <NavLink to={"/interview/InterParsonal"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
               InterPer
@@ -60,7 +60,7 @@ const Navbar = () => {
 
   return (
     <div className=''>
-      <div className="navbar bg-base-100 shadow-sm px-5">
+      <div className="navbar bg-black text-white shadow-sm px-5 border-b-[1px] border-gray-700 ">
         <div className="navbar-start flex gap-2 justify-between">
           {/* Mobile Menu */}
           <div className="drawer md:hidden">
@@ -108,7 +108,7 @@ const Navbar = () => {
 
           {
             user 
-            ?  <div className="dropdown dropdown-end">
+            ?  <div className="dropdown dropdown-end  ">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
@@ -116,7 +116,7 @@ const Navbar = () => {
                   src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
               </div>
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52  shadow">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-52  shadow  text-black ">
               <li>
                 <a className="justify-between">
                   Profile
