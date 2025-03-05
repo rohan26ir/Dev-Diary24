@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import SocialLogIn from '../SocialLogIn/SocialLogIn';
+import { AuthContext } from '../../Provider/Provider';
+import { useNavigate } from 'react-router-dom';
+
 
 const SignIn = () => {
+
+  const { signInUser } = useContext(AuthContext); // Firebase Sign-In Method
+  const navigate = useNavigate();
+
+  // State for email & password
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Handle Sign-In
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    signInUser(email, password)
+      .then((userCredential) => {
+        console.log('User signed in:', userCredential.user);
+        navigate('/'); // Redirect after login
+      })
+      .catch((error) => {
+        console.error('Sign-In Error:', error.message);
+      });
+  };
+
+
   return (
     <div>
       <div>
-        <form action="" className="px-2">
+        <form  onSubmit={handleSignIn} action="" className="px-2">
           
           {/* Email */}
           <fieldset className="fieldset">

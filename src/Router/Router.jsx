@@ -13,6 +13,8 @@ import ProblemSolving from "../pages/Interview/PSol/ProblemSolving";
 import SignIn from "../Account/SignIn/SignIn";
 import SignUp from "../Account/SignUp/SignUp";
 import Account from "../Account/Account";
+import Dashboard from "../Dashboard/Dashboard";
+import AddTasks from "../Dashboard/AddTasks/AddTasks";
 
 
 const Router = createBrowserRouter([
@@ -62,6 +64,16 @@ const Router = createBrowserRouter([
       {
         path: "/link",
         element: <LinkPage></LinkPage>
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+        children: [
+          {
+            path: "addTask",
+            element: <AddTasks></AddTasks>
+          }
+        ]
       }
     ]
     

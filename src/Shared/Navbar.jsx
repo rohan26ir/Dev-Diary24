@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { RiMenuLine } from "react-icons/ri";
+import { AuthContext } from '../Provider/Provider';
 
 const Navbar = () => {
+
+  const {user, logOut} = useContext(AuthContext);
+
+
+  console.log("Nab",user);
 
   // Define activeStyle as a string with the necessary classes
   const activeStyle = "bg-red-500 text-white px-3 py-2 rounded";
@@ -99,12 +105,10 @@ const Navbar = () => {
 
         {/* Profile Section */}
         <div className="navbar-end">
-          {/* Sign */}
-          <div>
-            <Link to={"/Account/SignIn"}><button className='btn btn-primary'>Sign Up</button></Link>
-          </div>
-          {/* Sign */}
-          <div className="dropdown dropdown-end">
+
+          {
+            user 
+            ?  <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
@@ -112,17 +116,26 @@ const Navbar = () => {
                   src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
               </div>
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52  shadow">
               <li>
                 <a className="justify-between">
                   Profile
                   <span className="badge">New</span>
                 </a>
               </li>
-              <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <NavLink to={'/dashboard'}><li className='pl-2.5'>Dashboard</li></NavLink>
+              <li><button onClick={logOut}>Logout</button></li>
             </ul>
           </div>
+
+          :  <div>
+          <Link to={"/Account/SignIn"}><button className='btn btn-primary'>Sign Up</button></Link>
+        </div>
+
+          }
+
+         
+
         </div>
       </div>
     </div>

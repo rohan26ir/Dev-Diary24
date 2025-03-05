@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: 'https://property-pulse-server.vercel.app'
+    baseURL: 'https://devdiary-server.vercel.app'
 })
 
 const useAxiosPublic = () => {

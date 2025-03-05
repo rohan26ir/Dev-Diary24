@@ -1,57 +1,123 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../Provider/Provider";
+import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+
+const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const SignUp = () => {
+  const { createNewUser } = useContext(AuthContext); // Firebase Auth Context
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+  });
+
+  const [image, setImage] = useState(null); // State for the uploaded image URL
+  const [error, setError] = useState(""); // Error state
+  const [successMessage, setSuccessMessage] = useState(""); // Success message state
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle image upload
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const response = await axiosPublic.post(imageHostingAPI, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setImage(response.data.data.url); // Set the uploaded image URL
+      } catch (err) {
+        console.error("Image Upload Error:", err);
+        setError("Failed to upload image");
+      }
+    }
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccessMessage("");
+
+    const { name, phone, email, password } = formData;
+
+    if (!name || !phone || !email || !password || !image) {
+      setError("All fields are required!");
+      return;
+    }
+
+    // Firebase Authentication Signup
+    try {
+      const result = await createNewUser(email, password);
+      console.log("Firebase Signup Success:", result.user);
+
+      // Prepare user data
+      const userInfo = {
+        name,
+        phone,
+        email,
+        image, // Include image URL in the user data
+      };
+
+      // Send user data to the backend
+      const res = await axiosPublic.post("/users", userInfo);
+      console.log("User saved in DB:", res.data);
+
+      // Success message and redirect after successful signup
+      setSuccessMessage("Account created successfully!");
+      navigate("/");
+    } catch (err) {
+      console.error("Signup Error:", err);
+      setError(err.message);
+    }
+  };
+
   return (
     <div>
       <div>
-        <form action="" className="px-2">
+        <form onSubmit={handleSubmit} className="px-2">
           {/* Name */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend">What is your name?</legend>
-            <input type="text" className="input" placeholder="Type here" />
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="input"
+              placeholder="Type here"
+            />
           </fieldset>
 
-          {/* Phone */}
+          {/* Image Upload */}
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">What is your Phone?</legend>
-            <label className="input validator">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-              >
-                <g fill="none">
-                  <path
-                    d="M7.25 11.5C6.83579 11.5 6.5 11.8358 6.5 12.25C6.5 12.6642 6.83579 13 7.25 13H8.75C9.16421 13 9.5 12.6642 9.5 12.25C9.5 11.8358 9.16421 11.5 8.75 11.5H7.25Z"
-                    fill="currentColor"
-                  ></path>
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M6 1C4.61929 1 3.5 2.11929 3.5 3.5V12.5C3.5 13.8807 4.61929 15 6 15H10C11.3807 15 12.5 13.8807 12.5 12.5V3.5C12.5 2.11929 11.3807 1 10 1H6ZM10 2.5H9.5V3C9.5 3.27614 9.27614 3.5 9 3.5H7C6.72386 3.5 6.5 3.27614 6.5 3V2.5H6C5.44771 2.5 5 2.94772 5 3.5V12.5C5 13.0523 5.44772 13.5 6 13.5H10C10.5523 13.5 11 13.0523 11 12.5V3.5C11 2.94772 10.5523 2.5 10 2.5Z"
-                    fill="currentColor"
-                  ></path>
-                </g>
-              </svg>
-              <input
-                type="tel"
-                className="tabular-nums"
-                required
-                placeholder="Phone"
-                pattern="[0-9]*"
-                minlength="10"
-                maxlength="10"
-                title="Must be 10 digits"
-              />
-            </label>
-            <p className="validator-hint">Must be 11 digits</p>
+            <legend className="fieldset-legend">Pick an image</legend>
+            <input
+              type="file"
+              className="file-input"
+              onChange={handleImageChange}
+            />
+            <label className="fieldset-label">Max size 2MB</label>
           </fieldset>
-
 
           {/* Email */}
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">What is your mail?</legend>
-
+            <legend className="fieldset-legend">What is your email?</legend>
             <label className="input validator">
               <svg
                 className="h-[1em] opacity-50"
@@ -69,16 +135,21 @@ const SignUp = () => {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </g>
               </svg>
-              <input type="email" placeholder="mail@site.com" required />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="mail@site.com"
+                required
+              />
             </label>
-            <div className="validator-hint hidden">
-              Enter valid email address
-            </div>
+            <div className="validator-hint hidden">Enter a valid email address</div>
           </fieldset>
 
-          {/* PassWord */}
+          {/* Password */}
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">What is your Password?</legend>
+            <legend className="fieldset-legend">What is your password?</legend>
             <label className="input validator">
               <svg
                 className="h-[1em] opacity-50"
@@ -103,11 +174,14 @@ const SignUp = () => {
               </svg>
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 required
                 placeholder="Password"
-                minlength="8"
+                minLength="8"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                title="Must be more than 8 characters, including number, lowercase letter, and uppercase letter"
               />
             </label>
             <p className="validator-hint hidden">
@@ -121,11 +195,18 @@ const SignUp = () => {
             </p>
           </fieldset>
 
-
-          <button type="submit" 
-          className="w-full border-[2px] bg-blue-400 font-bold border-gray-300 py-2 rounded-lg cursor-pointer ">Create Account</button>
-
+          <button
+            type="submit"
+            className="w-full border-[2px] bg-blue-400 font-bold border-gray-300 py-2 rounded-lg cursor-pointer"
+          >
+            Create Account
+          </button>
         </form>
+
+        {error && <p className="error-message text-red-500">{error}</p>}
+        {successMessage && (
+          <p className="success-message text-green-500">{successMessage}</p>
+        )}
       </div>
     </div>
   );
