@@ -20,12 +20,14 @@ const ShowTasks = () => {
   const fetchTasks = async () => {
     try {
       const res = await axiosSecure.get("/tasks", { withCredentials: true });
-      setTasks(res.data);
+      const filteredTasks = res.data.filter(task => task.remove !== "Yes"); // Exclude removed tasks
+      setTasks(filteredTasks);
     } catch (error) {
       console.error("Error fetching tasks:", error);
       setError("Failed to fetch tasks. Please try again later.");
     }
   };
+  
 
   const updateTaskStatus = async (taskId, newStatus) => {
     try {
@@ -36,16 +38,18 @@ const ShowTasks = () => {
     }
   };
 
-  const deleteTask = async (taskId) => {
+  const removeTask = async (taskId) => {
     try {
-      await axiosSecure.delete(`/tasks/${taskId}`, { withCredentials: true });
-      setTasks((prevTasks) => prevTasks.filter(task => task._id !== taskId));
-      toast.success("Task deleted successfully!");
+      await axiosSecure.patch(`/tasks/${taskId}/remove`, {}, { withCredentials: true });
+      setTasks((prevTasks) => prevTasks.filter(task => task._id !== taskId)); // Remove from UI
+      toast.success("Task removed successfully!");
     } catch (error) {
-      console.error("Error deleting task:", error);
-      toast.error("Failed to delete task.");
+      console.error("Error removing task:", error);
+      toast.error("Failed to remove task.");
     }
   };
+  
+  
 
   const calculateRemainingTime = (endDateTime) => {
     const now = moment();
@@ -78,31 +82,16 @@ const ShowTasks = () => {
                 <div>
                 <h3 className="text-lg font-semibold">Institution: {task.name}</h3>
                 <h3 className="text-lg font-semibold flex items-center gap-1"><PiSubtitlesBold /> {task.title}</h3>
-                <p className="text-gray-100">{task.description.length > 100 ? task.description.substring(0, 200) + "..." : task.description}</p>
+                <p className="text-gray-100">{task.description.length > 200 ? task.description.substring(0, 100) + "..." : task.description}</p>
                 <p className="text-sm text-gray-400">Start: {moment(task.startDateTime).format("MMM DD, YYYY hh:mm A")}</p>
                 <p className="text-sm text-gray-200">Deadline: {moment(task.endDateTime).format("MMM DD, YYYY hh:mm A")}</p>
                 </div>
                 
                 <div className="btn">
                 <p className="font-semibold text-red-500"> {calculateRemainingTime(task.endDateTime)}</p>
-                {/* <a href={task.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Task Link</a> */}
                 
-                {/* <select
-                  className="mt-2 p-2 border rounded-md w-full"
-                  value={task.status}
-                  onChange={(e) => updateTaskStatus(task._id, e.target.value)}
-                >
-                  <option value="pending">Pending</option>
-                  <option value="in-progress">In Progress</option>
-                  <option value="completed">Completed</option>
-                </select> */}
                 
-                {/* <button 
-                  className="mt-2 p-2 bg-red-500 text-white rounded-md w-full hover:bg-red-600"
-                  onClick={() => deleteTask(task._id)}
-                >
-                  Delete
-                </button> */}
+                
                 </div>
 
                 </div>
@@ -127,9 +116,9 @@ const ShowTasks = () => {
                   <div>
                     <button 
                   className=" p-2 bg-red-500 text-white rounded-md w-full hover:bg-red-600"
-                  onClick={() => deleteTask(task._id)}
+                  onClick={() => removeTask(task._id)}
                 >
-                  Delete
+                  Remove
                 </button>
                   </div>
                 </div>

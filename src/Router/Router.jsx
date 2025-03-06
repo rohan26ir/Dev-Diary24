@@ -17,6 +17,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import AddTasks from "../Dashboard/AddTasks/AddTasks";
 import PrivateRoute from "./PrivateRoute";
 import { Home } from "lucide-react";
+import History from "../Dashboard/History/History";
 
 
 const Router = createBrowserRouter([
@@ -76,9 +77,14 @@ const Router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
-        path: "/dashboard",
+        path: "/dashboard/AddTask",
         element: <AddTasks></AddTasks>
-      }
+      },
+      {
+        path: "/dashboard/History",
+        element: <History></History>
+      },
+      
     ]
   },
 ]);

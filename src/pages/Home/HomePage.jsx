@@ -3,6 +3,8 @@ import HomeTask from './Task/HomeTask';
 import ShowTasks from '../../Dashboard/ShowTasks/ShowTasks';
 import Hero from './Hero/Hero';
 import { AuthContext } from '../../Provider/Provider';
+import HomeWork from './HomeWork/HomeWork';
+import ShowEmptyTask from '../../Dashboard/ShowTasks/ShowEmptyTask';
 
 const HomePage = () => {
   const {user} =useContext(AuthContext)
@@ -12,11 +14,19 @@ const HomePage = () => {
 
         <div className='bg-white'><Hero></Hero></div>
 
+        
         {
-          user && <div><ShowTasks></ShowTasks></div>
+          user 
+          ? <ShowTasks></ShowTasks>
+          : <ShowEmptyTask></ShowEmptyTask>
         }
 
-        {/* <div><ShowTasks></ShowTasks></div> */}
+        
+
+
+        <div className=''>
+          <HomeWork></HomeWork>
+        </div>
 
       </div>
     </div>

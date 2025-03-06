@@ -123,7 +123,7 @@ const Navbar = () => {
                   <span className="badge">New</span>
                 </a>
               </li>
-              <NavLink to={'/dashboard'}><li className='pl-2.5'>Dashboard</li></NavLink>
+              <NavLink to={'/dashboard/AddTask'}><li className='pl-2.5'>Dashboard</li></NavLink>
               <li><button onClick={logOut}>Logout</button></li>
             </ul>
           </div>

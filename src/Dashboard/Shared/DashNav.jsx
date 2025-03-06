@@ -4,12 +4,13 @@ import { NavLink } from "react-router-dom";
 const DashNav = () => {
   const menuItems = [
     { name: "DevDairy24", path: "/" },
-    { name: "Add Task", path: "/dashboard" },
+    { name: "Add Task", path: "/dashboard/AddTask" },
     { name: "Theory", path: "/dashboard/theory" },
     { name: "PSol", path: "/dashboard/psol" },
     { name: "Note", path: "/dashboard/note" },
     { name: "Code", path: "/dashboard/code" },
     { name: "Link", path: "/dashboard/link" },
+    { name: "History", path: "/dashboard/History" },
   ];
 
   const activeStyle = "bg-red-500 text-white px-3 py-2 rounded w-full block";
