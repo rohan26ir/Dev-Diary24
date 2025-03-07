@@ -15,16 +15,17 @@ const HomePage = () => {
         <div className='bg-white'><Hero></Hero></div>
 
         
+        <div className='mt-5'>
         {
           user 
           ? <ShowTasks></ShowTasks>
           : <ShowEmptyTask></ShowEmptyTask>
         }
-
+        </div>
         
 
 
-        <div className=''>
+        <div className='pt-5'>
           <HomeWork></HomeWork>
         </div>
 
