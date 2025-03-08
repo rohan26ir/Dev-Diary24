@@ -197,7 +197,7 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className="w-full border-[2px] bg-blue-400 font-bold border-gray-300 py-2 rounded-lg cursor-pointer"
+            className="w-full border-[2px] bg-[#FB2C36] font-bold border-gray-300 py-2 rounded-lg cursor-pointer"
           >
             Create Account
           </button>

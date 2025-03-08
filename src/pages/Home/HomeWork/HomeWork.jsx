@@ -25,9 +25,9 @@ const HomeWork = () => {
               </p>
 
               <div className="flex gap-2 py-2">
-                <div className="bg-white/20 hover:bg-white/15 px-4 py-1 rounded-3xl"> Strategies </div>
-                <div className="bg-white/20 hover:bg-white/15 px-4 py-1 rounded-3xl"> Subjects </div>
-                <div className="bg-white/20 hover:bg-white/15 px-4 py-1 rounded-3xl"> Tools </div>
+                <div className="bg-white/20 text-white/85 hover:bg-white/15 px-4 py-1 rounded-3xl"> Strategies </div>
+                <div className="bg-white/20 text-white/85 hover:bg-white/15 px-4 py-1 rounded-3xl"> Subjects </div>
+                <div className="bg-white/20 text-white/85 hover:bg-white/15 px-4 py-1 rounded-3xl"> Tools </div>
               </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ const Navbar = () => {
   console.log("Nab",user);
 
   // Define activeStyle as a string with the necessary classes
-  const activeStyle = "bg-red-500 text-white px-3 py-2 rounded";
+  const activeStyle = "bg-white/20 text-white px-3 py-2 rounded";
 
   const navBar = <>
     <li>
@@ -88,7 +88,7 @@ const Navbar = () => {
 
           {/* Logo */}
           <div className='hidden md:block'>
-            <Link to={"/"} title='DevDiary' className="text-xl text-[#C70039] font-bold">DevDiary</Link>
+            <Link to={"/"} title='DevDiary' className="text-xl text-white font-bold">DevDiary24</Link>
           </div>
         </div>
 
@@ -113,7 +113,7 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="User Avatar"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  src={user.photoURL} />
               </div>
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-52  shadow  text-black ">
@@ -129,7 +129,7 @@ const Navbar = () => {
           </div>
 
           :  <div>
-          <Link to={"/Account/SignIn"}><button className='btn btn-primary'>Sign Up</button></Link>
+          <Link to={"/Account/SignIn"}><button className='bg-[#FB2C36]/90 hover:bg-[#FB2C36]/80 px-3 py-2 rounded-sm cursor-pointer'>Sign Up</button></Link>
         </div>
 
           }
