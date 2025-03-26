@@ -24,6 +24,11 @@ const Navbar = () => {
         <summary className=''>Interview</summary>
         <ul className="p-2 text-black">
           <li>
+            <NavLink to={"/InterviewFAQ"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
+            InterviewFAQ
+            </NavLink>
+          </li>
+          <li>
             <NavLink to={"/interview/InterParsonal"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
               InterPer
             </NavLink>

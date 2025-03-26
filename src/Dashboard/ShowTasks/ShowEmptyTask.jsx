@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import RealTimeClock from '../../components/RealTimeClock';
 
 import { GoGoal } from "react-icons/go";
 import { BsFileEarmarkBreakFill } from 'react-icons/bs';
 import {  GiStarFormation, GiTimeBomb } from "react-icons/gi";  
+import { AuthContext } from '../../Provider/Provider';
 
 const ShowEmptyTask = () => {
+  const {user} =useContext(AuthContext)
+  
   return (
     <div>
       <div className='w-11/12 mx-auto py-2 text-white'>
@@ -100,7 +103,10 @@ const ShowEmptyTask = () => {
 
           </div>
 
-          <div className='w-[100%]  md:w-[73%]  rounded-sm bg-white/15 p-2 text-black h-20'>
+          {
+            !user 
+            &&
+            <div className='w-[100%]  md:w-[73%]  rounded-sm bg-white/15 p-2 text-black h-20'>
             <div className='flex justify-between gap-1 px-3 '>
               <div className='flex flex-col justify-center items-center '>
                 <div className='text-xl text-white/95'>Sat</div>
@@ -132,6 +138,9 @@ const ShowEmptyTask = () => {
               </div>
             </div>
           </div>
+          }
+
+          
             </div>
             </div>
 

@@ -88,7 +88,7 @@ const AddTasks = () => {
         <h2 className="text-2xl font-bold mb-6">Add New Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="form-control">
-            <label htmlFor="name" className="label">Task Name</label>
+            <label htmlFor="name" className="label">Institution/Medium</label>
             <input
               type="text"
               id="name"
@@ -114,7 +114,7 @@ const AddTasks = () => {
           </div>
 
           <div className="form-control">
-            <label htmlFor="title" className="label">Task Title</label>
+            <label htmlFor="title" className="label">Title</label>
             <input
               type="text"
               id="title"

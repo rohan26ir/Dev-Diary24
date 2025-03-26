@@ -7,9 +7,9 @@ import HomePage from "../pages/Home/HomePage";
 import NotesPage from "../pages/Notes/NotesPage";
 import CodePage from "../pages/Code/CodePage";
 import LinkPage from "../pages/Link/LinkPage";
-import InterParsonal from "../pages/Interview/InterParsonal/InterParsonal";
+// import InterParsonal from "../pages/Interview/InterParsonal/InterParsonal";
 import Theory from "../pages/Interview/Theory/Theory";
-import ProblemSolving from "../pages/Interview/PSol/ProblemSolving";
+// import ProblemSolving from "../pages/Interview/PSol/ProblemSolving";
 import SignIn from "../Account/SignIn/SignIn";
 import SignUp from "../Account/SignUp/SignUp";
 import Account from "../Account/Account";
@@ -18,6 +18,8 @@ import AddTasks from "../Dashboard/AddTasks/AddTasks";
 import PrivateRoute from "./PrivateRoute";
 import { Home } from "lucide-react";
 import History from "../Dashboard/History/History";
+import AddInterviewFAQ from "../Dashboard/InterviewFAQ/AddInterviewFAQ";
+import InterviewFAQ from "../pages/InterviewFAQ/InterviewFAQ";
 
 
 const Router = createBrowserRouter([
@@ -45,17 +47,21 @@ const Router = createBrowserRouter([
         ]
       },
       {
-        path: "/interview/InterParsonal",
-        element: <InterParsonal></InterParsonal>
+        path: "/InterviewFAQ",
+        element: <InterviewFAQ></InterviewFAQ>
       },
+      // {
+      //   path: "/interview/InterParsonal",
+      //   element: <InterParsonal></InterParsonal>
+      // },
       {
         path: "/interview/theory",
         element: <Theory></Theory>
       },
-      {
-        path: "/interview/problem-solving",
-        element: <ProblemSolving></ProblemSolving>
-      },
+      // {
+      //   path: "/interview/problem-solving",
+      //   element: <ProblemSolving></ProblemSolving>
+      // },
       {
         path: "/note",
         element: <NotesPage></NotesPage>
@@ -79,6 +85,10 @@ const Router = createBrowserRouter([
       {
         path: "/dashboard/AddTask",
         element: <AddTasks></AddTasks>
+      },
+      {
+        path: "/dashboard/AddInterviewFAQ",
+        element: <AddInterviewFAQ></AddInterviewFAQ>
       },
       {
         path: "/dashboard/History",

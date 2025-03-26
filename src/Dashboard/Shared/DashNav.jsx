@@ -5,7 +5,7 @@ const DashNav = () => {
   const menuItems = [
     { name: "DevDairy24", path: "/" },
     { name: "Add Task", path: "/dashboard/AddTask" },
-    { name: "Theory", path: "/dashboard/theory" },
+    { name: "InterviewFAQ", path: "/dashboard/AddInterviewFAQ" },
     { name: "PSol", path: "/dashboard/psol" },
     { name: "Note", path: "/dashboard/note" },
     { name: "Code", path: "/dashboard/code" },

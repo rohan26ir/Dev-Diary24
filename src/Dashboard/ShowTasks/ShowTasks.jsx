@@ -3,11 +3,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import moment from "moment";
 import { PiSubtitlesBold } from "react-icons/pi";
 import { toast } from "react-toastify";
+import { MdOutlineSubject, MdOutlineTopic } from "react-icons/md";
 
 const ShowTasks = () => {
   const axiosSecure = useAxiosSecure();
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
+  const [selectedTask, setSelectedTask] = useState(null); // Track the task for the modal
 
   useEffect(() => {
     fetchTasks();
@@ -20,19 +22,20 @@ const ShowTasks = () => {
   const fetchTasks = async () => {
     try {
       const res = await axiosSecure.get("/tasks", { withCredentials: true });
-      const filteredTasks = res.data.filter(task => task.remove !== "Yes"); // Exclude removed tasks
+      const filteredTasks = res.data.filter((task) => task.remove !== "Yes");
       setTasks(filteredTasks);
     } catch (error) {
       console.error("Error fetching tasks:", error);
       setError("Failed to fetch tasks. Please try again later.");
     }
   };
-  
 
   const updateTaskStatus = async (taskId, newStatus) => {
     try {
       await axiosSecure.patch(`/tasks/${taskId}/status`, { status: newStatus }, { withCredentials: true });
-      setTasks((prevTasks) => prevTasks.map(task => task._id === taskId ? { ...task, status: newStatus } : task));
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task._id === taskId ? { ...task, status: newStatus } : task))
+      );
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -41,21 +44,24 @@ const ShowTasks = () => {
   const removeTask = async (taskId) => {
     try {
       await axiosSecure.patch(`/tasks/${taskId}/remove`, {}, { withCredentials: true });
-      setTasks((prevTasks) => prevTasks.filter(task => task._id !== taskId)); // Remove from UI
+      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
       toast.success("Task removed successfully!");
     } catch (error) {
       console.error("Error removing task:", error);
       toast.error("Failed to remove task.");
     }
   };
-  
-  
 
   const calculateRemainingTime = (endDateTime) => {
     const now = moment();
     const end = moment(endDateTime);
     const duration = moment.duration(end.diff(now));
     return `${duration.days()}d ${duration.hours()}h ${duration.minutes()}m ${duration.seconds()}s`;
+  };
+
+  const openModal = (task) => {
+    setSelectedTask(task);
+    document.getElementById("task_modal").showModal();
   };
 
   const groupedTasks = tasks.reduce((acc, task) => {
@@ -65,69 +71,118 @@ const ShowTasks = () => {
   }, {});
 
   return (
-    <div className="w-[100%] mx-auto p-6 text-white">
-      <h2 className="text-2xl font-bold mb-4">Your Tasks</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      
+    <div className="w-11/12 mx-auto text-white bg-black ">
+      {error && <p className="text-[#FB2C36] text-center mb-4">{error}</p>}
+
       {Object.entries(groupedTasks).map(([status, tasks]) => (
-        <div key={status} className="mb-6 ">
-          <h3 className="text-xl font-semibold mb-2 capitalize">{status}</h3>
+        <div key={status} className="mb-8">
+          <h3 className="text-2xl font-bold mb-4 capitalize text-[#FB2C36] border-b-2 border-[#FB2C36] pb-2">
+            {status}
+          </h3>
 
-          <div className="grid md:grid-cols-2  gap-4">
+          {/* Conditional Layout Based on Task Count */}
+          <div
+            className={`${
+              tasks.length === 1
+                ? "flex flex-row gap-6"
+                : "grid md:grid-cols-2 gap-6"
+            }`}
+          >
             {tasks.map((task) => (
-              <div key={task._id} className="flex flex-col border p-4 shadow-md rounded-lg bg-white/30 text-black ">
-                
-                {/* top */}
-                <div className="flex justify-between gap-3 grow pb-2">
-                <div>
-                <h3 className="text-lg font-semibold">Institution: {task.name}</h3>
-                <h3 className="text-lg font-semibold flex items-center gap-1"><PiSubtitlesBold /> {task.title}</h3>
-                <p className="text-gray-100">{task.description.length > 200 ? task.description.substring(0, 100) + "..." : task.description}</p>
-                <p className="text-sm text-gray-400">Start: {moment(task.startDateTime).format("MMM DD, YYYY hh:mm A")}</p>
-                <p className="text-sm text-gray-200">Deadline: {moment(task.endDateTime).format("MMM DD, YYYY hh:mm A")}</p>
-                </div>
-                
-                <div className="btn">
-                <p className="font-semibold text-red-500"> {calculateRemainingTime(task.endDateTime)}</p>
-                
-                
-                
-                </div>
-
-                </div>
-
-
-                {/* bottom */}
-                <div className="flex justify-between items-end pt-2 border-t-[1px] border-gray-500 ">
-                  <div>
-                  <a href={task.url} target="_blank" rel="noopener noreferrer" className=""><button className="p-2 bg-sky-800 text-black rounded-md w-full hover:bg-sky-900 underline">Task Link</button></a>
+              <div
+                key={task._id}
+                className={`flex flex-col border border-white/20 p-5 rounded-xl bg-black/80 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
+                  tasks.length === 1 ? "w-full" : ""
+                }`}
+              >
+                {/* Top Section: Title, Subject, and Time */}
+                <div className="flex justify-between items-center gap-4 pb-4">
+                  <div className="">
+                    <h3 className="flex items-center gap-2 text-xl font-semibold text-white">
+                    <PiSubtitlesBold className="text-[#FB2C36]" />
+                    {task.title}
+                    </h3>
+                    <h4 className="text-lg font-medium flex items-center gap-2 text-white/80">
+                    <MdOutlineTopic className="text-[#FB2C36]" /> {task.subject}
+                    </h4>
                   </div>
-                  <div>
+                  <div className="text-right">
+                    <p className="font-semibold text-[#FB2C36] text-lg px-4 py-2 bg-white/10 rounded-lg">
+                      {calculateRemainingTime(task.endDateTime)}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Description Section: Full Width */}
+                <div className="pb-4">
+                  <p
+                    className="text-white/80 cursor-pointer hover:text-[#FB2C36] transition-colors duration-200 flex items-center gap-2"  
+                    onClick={() => openModal(task)}
+                  >
+                  <span className="text-[#FB2C36] text-2xl"><MdOutlineSubject /></span>
+                    {" "}
+                    {task.description.length > 100
+                      ? task.description.substring(0, 100) + "..."
+                      : task.description}
+                  </p>
+                </div>
+
+                {/* Bottom Section */}
+                <div className="flex justify-between items-center pt-4 border-t border-white/20">
+                  <a
+                    href={task.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-white/20 text-white rounded-lg hover:bg-white/10 transition-colors duration-200"
+                  >
+                    Task Link
+                  </a>
                   <select
-                  className=" p-2 border rounded-md w-full"
-                  value={task.status}
-                  onChange={(e) => updateTaskStatus(task._id, e.target.value)}
-                >
-                  <option value="pending">Pending</option>
-                  <option value="in-progress">In Progress</option>
-                  <option value="completed">Completed</option>
-                </select>
-                  </div>
-                  <div>
-                    <button 
-                  className=" p-2 bg-red-500 text-white rounded-md w-full hover:bg-red-600"
-                  onClick={() => removeTask(task._id)}
-                >
-                  Remove
-                </button>
-                  </div>
+                    className="px-4 py-2 border border-white/20 rounded-lg bg-black text-white focus:outline-none focus:ring-2 focus:ring-[#FB2C36] transition-all duration-200"
+                    value={task.status}
+                    onChange={(e) => updateTaskStatus(task._id, e.target.value)}
+                  >
+                    <option className="bg-white/10" value="pending">Pending</option>
+                    <option className="bg-white/10" value="in-progress">In Progress</option>
+                    <option className="bg-white/10" value="completed">Completed</option>
+                  </select>
+                  <button
+                    className="px-4 py-2 bg-[#FB2C36] text-white rounded-lg hover:bg-[#d9232d] transition-colors duration-200"
+                    onClick={() => removeTask(task._id)}
+                  >
+                    Remove
+                  </button>
                 </div>
-
               </div>
             ))}
           </div>
         </div>
       ))}
+
+      {/* DaisyUI Modal */}
+      <dialog id="task_modal" className="modal">
+        <div className="modal-box bg-black text-white border border-white/20">
+          {selectedTask && (
+            <>
+              <h3 className="font-bold text-lg text-[#FB2C36]">{selectedTask.name}</h3>
+              <p className="py-4 text-white/80">{selectedTask.description}</p>
+              <p className="text-sm text-white/60">
+                Start: {moment(selectedTask.startDateTime).format("MMM DD, YYYY hh:mm A")}
+              </p>
+              <p className="text-lg text-[#FB2C36]">
+                Deadline: {moment(selectedTask.endDateTime).format("MMM DD, YYYY hh:mm A")}
+              </p>
+              <div className="modal-action">
+                <form method="dialog">
+                  <button className="px-3 py-1 rounded-lg cursor-pointer bg-[#FB2C36] text-white hover:bg-[#d9232d]">
+                    Close
+                  </button>
+                </form>
+              </div>
+            </>
+          )}
+        </div>
+      </dialog>
     </div>
   );
 };
