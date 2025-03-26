@@ -22,9 +22,9 @@ const Navbar = () => {
     <li>
       <details className=''>
         <summary className=''>Interview</summary>
-        <ul className="p-2 text-black">
+        <ul className="p-2 text-white bg-[#FB2C36]/60">
           <li>
-            <NavLink to={"/InterviewFAQ"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
+            <NavLink to={"/my-InterviewFAQ"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
             InterviewFAQ
             </NavLink>
           </li>
@@ -59,6 +59,11 @@ const Navbar = () => {
     <li>
       <NavLink to={'/link'} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
         Link
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to={'/InterviewFAQs'} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
+      InterviewFAQs
       </NavLink>
     </li>
   </>;

@@ -5,6 +5,7 @@ import Hero from './Hero/Hero';
 import { AuthContext } from '../../Provider/Provider';
 import HomeWork from './HomeWork/HomeWork';
 import ShowEmptyTask from '../../Dashboard/ShowTasks/ShowEmptyTask';
+import Loading from '../../Shared/Loading';
 
 const HomePage = () => {
   const {user} =useContext(AuthContext)
@@ -25,6 +26,9 @@ const HomePage = () => {
           
         }
         </div>
+
+
+        <Loading></Loading>
         
 
 

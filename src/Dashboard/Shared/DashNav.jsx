@@ -10,6 +10,7 @@ const DashNav = () => {
     { name: "Note", path: "/dashboard/note" },
     { name: "Code", path: "/dashboard/code" },
     { name: "Link", path: "/dashboard/link" },
+    { name: "FAQs", path: "/dashboard/DashInterViewFAQs" },
     { name: "History", path: "/dashboard/History" },
   ];
 

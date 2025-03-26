@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Filter from "../../components/Custom/Filter";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const InterviewFAQ = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [faqs, setFaqs] = useState([]);
   const [selectedFaq, setSelectedFaq] = useState(null);
 
@@ -13,13 +13,14 @@ const InterviewFAQ = () => {
   const [selectedMode, setSelectedMode] = useState("");
 
   useEffect(() => {
-    axiosSecure
+    axiosPublic
       .get("/interview-faqs")
       .then((res) => {
-        setFaqs(res.data);
+        const publicFaqs = res.data.filter((faq) => faq.visibility === "Public");
+        setFaqs(publicFaqs);
       })
-      .catch((err) => console.error("Error fetching FAQs:", err));
-  }, [axiosSecure]);
+      .catch((err) => console.error("Error fetching public FAQs:", err));
+  }, [axiosPublic]);
 
   // Group FAQs by category
   const groupedFaqs = faqs.reduce((acc, faq) => {
@@ -55,7 +56,7 @@ const InterviewFAQ = () => {
 
   return (
     <div className="container mx-auto p-4 bg-black text-white min-h-screen">
-      <h2 className="text-2xl font-bold mb-6 border-b-2 border-[#FB2C36] pb-2">
+      <h2 className="text-2xl font-bold text-white mb-6 border-b-2 border-[#FB2C36] pb-2">
         Interview FAQs
       </h2>
 
@@ -100,9 +101,11 @@ const InterviewFAQ = () => {
       {/* DaisyUI Modal */}
       <dialog id="faq_modal" className="modal">
         <div className="modal-box bg-black text-white border border-[#FB2C36]">
-          <h3 className="font-bold text-xl text-[#FB2C36] mb-4">{selectedFaq?.question}</h3>
+          <h3 className="font-bold text-xl text-[#FB2C36] mb-4">
+            {selectedFaq?.question}
+          </h3>
           <p className="text-white mb-2">{selectedFaq?.answer}</p>
-          <p className="text-sm text-gray-300 mt-10 border-t-[1px] border-gray-700 pt-2 ">
+          <p className="text-sm text-gray-300">
             Category: <span className="text-[#FB2C36]">{selectedFaq?.category}</span> | Mode:{" "}
             <span className="text-[#FB2C36]">{selectedFaq?.mode}</span>
           </p>

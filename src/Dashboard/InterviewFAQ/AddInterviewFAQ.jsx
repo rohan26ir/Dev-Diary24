@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-
-// Assuming you're using SweetAlert for notifications
+import React, { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../Provider/Provider';
+import useAxiosSecure from '../../hooks/useAxiosSecure'; // Import the useAxiosSecure hook
 
 const AddInterviewFAQ = () => {
+    const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();  // Use the axiosSecure instance
+
     const questionTypes = [
         "HTML", "CSS", "JavaScript", "React.js", "Next.js", "Vue.js", "Angular",
         "Svelte", "Node.js", "Express.js", "NestJS", "MongoDB", "MySQL",
@@ -27,36 +30,33 @@ const AddInterviewFAQ = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-   
+
         const form = e.target;
-   
+
         const category = form.category.value;
         const mode = form.mode.value;
         const question = form.question.value;
         const answer = form.answer.value;
-   
+        const email = user?.email; // ✅ Adding user email
+        const visibility = "Private"; // ✅ Adding user email
+        const timestamp = new Date().toISOString(); // ✅ Adding timestamp for current date and time
+
         // Check if any required fields are missing
         if (!category || !mode || !question || !answer) {
             console.error("Missing required fields:", { category, mode, question, answer });
             alert("Please fill in all required fields.");
             return;  // Stop further execution if fields are missing
         }
-   
-        const faq = { category, mode, question, answer };
-   
+
+        const faq = { email, visibility, mode, category, question, answer, timestamp }; // Store all fields including timestamp
+
         console.log("Submitting FAQ:", faq);
-   
-        fetch("https://devdiary-server.vercel.app/addInterviewFAQ", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(faq)
-        })
-            .then((res) => res.json())
+
+        // Use axiosSecure to send the request
+        axiosSecure.post("/addInterviewFAQ", faq)
             .then((data) => {
                 console.log("Server Response:", data);
-                if (data.insertedId) {
+                if (data.data.insertedId) {
                     Swal.fire({
                         title: "Success!",
                         text: "FAQ submitted successfully!",
@@ -126,9 +126,9 @@ const AddInterviewFAQ = () => {
                     {/* Answer of FAQ */}
                     <fieldset className="fieldset">
                         <legend className="fieldset-legend">What is your Answer?</legend>
-                        <textarea 
+                        <textarea
                             name="answer"
-                            className="input w-full h-32"
+                            className="w-[100%] h-32 p-2"
                             placeholder="Type here"
                             value={answer}  // ✅ Controlled input
                             onChange={handleAnswerChange}  // ✅ Updates state as user types

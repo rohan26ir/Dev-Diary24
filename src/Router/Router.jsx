@@ -20,6 +20,8 @@ import { Home } from "lucide-react";
 import History from "../Dashboard/History/History";
 import AddInterviewFAQ from "../Dashboard/InterviewFAQ/AddInterviewFAQ";
 import InterviewFAQ from "../pages/InterviewFAQ/InterviewFAQ";
+import InterviewFAQspublic from "../pages/InterviewFAQ/InterviewFAQspublic";
+import DashInterViewFAQs from "../Dashboard/InterViewFAQs/DashInterViewFAQs";
 
 
 const Router = createBrowserRouter([
@@ -47,8 +49,12 @@ const Router = createBrowserRouter([
         ]
       },
       {
-        path: "/InterviewFAQ",
-        element: <InterviewFAQ></InterviewFAQ>
+        path: "/my-InterviewFAQ",
+        element: <PrivateRoute><InterviewFAQ></InterviewFAQ></PrivateRoute>
+      },
+      {
+        path: "/InterviewFAQs",
+        element: <InterviewFAQspublic></InterviewFAQspublic>
       },
       // {
       //   path: "/interview/InterParsonal",
@@ -89,6 +95,10 @@ const Router = createBrowserRouter([
       {
         path: "/dashboard/AddInterviewFAQ",
         element: <AddInterviewFAQ></AddInterviewFAQ>
+      },
+      {
+        path: "/dashboard/DashInterViewFAQs",
+        element: <DashInterViewFAQs></DashInterViewFAQs>
       },
       {
         path: "/dashboard/History",
