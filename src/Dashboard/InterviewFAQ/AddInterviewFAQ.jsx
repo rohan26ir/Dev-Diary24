@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Provider/Provider';
-import useAxiosSecure from '../../hooks/useAxiosSecure'; // Import the useAxiosSecure hook
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AddInterviewFAQ = () => {
     const { user } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();  // Use the axiosSecure instance
+    const axiosSecure = useAxiosSecure();
 
     const questionTypes = [
         "HTML", "CSS", "JavaScript", "React.js", "Next.js", "Vue.js", "Angular",
@@ -20,39 +20,44 @@ const AddInterviewFAQ = () => {
         "Problem-Solving", "Complex", "Expert"
     ];
 
-    // ✅ State for answer field
     const [answer, setAnswer] = useState("");
+    const [category, setCategory] = useState("");
+    const [mode, setMode] = useState("");
+    const [question, setQuestion] = useState("");
 
-    // ✅ Handle answer input change
     const handleAnswerChange = (e) => {
         setAnswer(e.target.value);
+    };
+
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
+    };
+
+    const handleModeChange = (e) => {
+        setMode(e.target.value);
+    };
+
+    const handleQuestionChange = (e) => {
+        setQuestion(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const form = e.target;
+        const email = user?.email;
+        const visibility = "Private";
+        const timestamp = new Date().toISOString();
 
-        const category = form.category.value;
-        const mode = form.mode.value;
-        const question = form.question.value;
-        const answer = form.answer.value;
-        const email = user?.email; // ✅ Adding user email
-        const visibility = "Private"; // ✅ Adding user email
-        const timestamp = new Date().toISOString(); // ✅ Adding timestamp for current date and time
-
-        // Check if any required fields are missing
         if (!category || !mode || !question || !answer) {
             console.error("Missing required fields:", { category, mode, question, answer });
             alert("Please fill in all required fields.");
-            return;  // Stop further execution if fields are missing
+            return;
         }
 
-        const faq = { email, visibility, mode, category, question, answer, timestamp }; // Store all fields including timestamp
+        const faq = { email, visibility, mode, category, question, answer, timestamp };
 
         console.log("Submitting FAQ:", faq);
 
-        // Use axiosSecure to send the request
         axiosSecure.post("/addInterviewFAQ", faq)
             .then((data) => {
                 console.log("Server Response:", data);
@@ -63,6 +68,12 @@ const AddInterviewFAQ = () => {
                         icon: "success",
                         confirmButtonText: "OK"
                     });
+
+                    // Clear all fields after successful submission
+                    setCategory("");
+                    setMode("");
+                    setQuestion("");
+                    setAnswer("");
                 } else {
                     Swal.fire({
                         title: "Error!",
@@ -86,59 +97,79 @@ const AddInterviewFAQ = () => {
     return (
         <div className='bg-white/10 p-5'>
             <form onSubmit={handleSubmit}>
-                <div className='bg-white text-black p-5 rounded-lg'>
+                <div className='text-gray-200 p-5 shadow-2xl rounded-lg'>
                     <div className='flex justify-center'>
                         <h2 className='text-2xl font-bold'>Interview FAQ</h2>
                     </div>
 
-                    {/* Select Option */}
                     <div className='flex gap-4'>
                         <fieldset className="fieldset w-full">
-                            <legend className="fieldset-legend">Category</legend>
-                            <select name="category" className="select" required>
+                            <legend className="fieldset-legend text-white">Category</legend>
+                            <select 
+                                name="category" 
+                                className="select bg-black text-white" 
+                                value={category}
+                                onChange={handleCategoryChange}
+                                required
+                            >
                                 <option value="" disabled selected>Pick a Question Type</option>
                                 {questionTypes.map((type, index) => (
                                     <option key={index} value={type}>{type}</option>
                                 ))}
                             </select>
-                            <span className="fieldset-label">Select</span>
+                            <span className="fieldset-label text-black">Select</span>
                         </fieldset>
 
                         <fieldset className="fieldset w-full">
-                            <legend className="fieldset-legend">Mode</legend>
-                            <select name="mode" className="select" required>
+                            <legend className="fieldset-legend text-white">Mode</legend>
+                            <select 
+                                name="mode" 
+                                className="select bg-black text-white" 
+                                value={mode}
+                                onChange={handleModeChange}
+                                required
+                            >
                                 <option value="" disabled selected>Pick a Mode</option>
                                 {questionModes.map((mode, index) => (
                                     <option key={index} value={mode}>{mode}</option>
                                 ))}
                             </select>
-                            <span className="fieldset-label">Select</span>
+                            <span className="fieldset-label text-black">Select</span>
                         </fieldset>
                     </div>
 
-                    {/* Input Field */}
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend">What is your Question?</legend>
-                        <input type="text" name='question' className="input w-full" placeholder="Type here" required />
-                        <p className="fieldset-label">Write a Question</p>
+                        <legend className="fieldset-legend text-white">What is your Question?</legend>
+                        <input 
+                            type="text" 
+                            name='question' 
+                            className="input w-full bg-black text-white" 
+                            placeholder="Type here" 
+                            value={question}
+                            onChange={handleQuestionChange}
+                            required
+                        />
+                        <p className="fieldset-label text-black">Write a Question</p>
                     </fieldset>
 
-                    {/* Answer of FAQ */}
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend">What is your Answer?</legend>
+                        <legend className="fieldset-legend text-white">What is your Answer?</legend>
                         <textarea
                             name="answer"
-                            className="w-[100%] h-32 p-2"
+                            className="w-[100%] h-32 p-2 bg-black text-white"
                             placeholder="Type here"
-                            value={answer}  // ✅ Controlled input
-                            onChange={handleAnswerChange}  // ✅ Updates state as user types
+                            value={answer}
+                            onChange={handleAnswerChange}
                             required
                         />
                         <p className="fieldset-label">Write an Answer</p>
                     </fieldset>
 
                     <div className='flex justify-center mt-1'>
-                        <button type="submit" className='bg-[#FB2C36] hover:rotate-2 text-white font-bold py-2 px-4 rounded cursor-pointer'>
+                        <button 
+                            type="submit" 
+                            className='bg-[#FB2C36] hover:rotate-2 text-white font-bold py-2 px-4 rounded cursor-pointer'
+                        >
                             Submit FAQ
                         </button>
                     </div>

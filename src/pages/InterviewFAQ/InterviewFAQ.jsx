@@ -53,6 +53,16 @@ const InterviewFAQ = () => {
     document.getElementById("faq_modal").showModal();
   };
 
+  // Function to handle line breaks in answers
+  const renderAnswerWithLineBreaks = (answer) => {
+    return answer.split("\n").map((str, index) => (
+      <span key={index}>
+        {str}
+        <br />
+      </span>
+    ));
+  };
+
   return (
     <div className="container mx-auto p-4 bg-black text-white min-h-screen">
       <h2 className="text-2xl font-bold mb-6 border-b-2 border-[#FB2C36] pb-2">
@@ -101,7 +111,9 @@ const InterviewFAQ = () => {
       <dialog id="faq_modal" className="modal">
         <div className="modal-box bg-black text-white border border-[#FB2C36]">
           <h3 className="font-bold text-xl text-[#FB2C36] mb-4">{selectedFaq?.question}</h3>
-          <p className="text-white mb-2">{selectedFaq?.answer}</p>
+          <p className="text-white mb-2">
+            {selectedFaq ? renderAnswerWithLineBreaks(selectedFaq.answer) : ""}
+          </p>
           <p className="text-sm text-gray-300 mt-10 border-t-[1px] border-gray-700 pt-2 ">
             Category: <span className="text-[#FB2C36]">{selectedFaq?.category}</span> | Mode:{" "}
             <span className="text-[#FB2C36]">{selectedFaq?.mode}</span>

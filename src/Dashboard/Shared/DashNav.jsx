@@ -1,33 +1,36 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const DashNav = () => {
   const menuItems = [
-    { name: "DevDairy24", path: "/" },
-    { name: "Add Task", path: "/dashboard/AddTask" },
-    { name: "InterviewFAQ", path: "/dashboard/AddInterviewFAQ" },
-    { name: "PSol", path: "/dashboard/psol" },
-    { name: "Note", path: "/dashboard/note" },
-    { name: "Code", path: "/dashboard/code" },
-    { name: "Link", path: "/dashboard/link" },
-    { name: "FAQs", path: "/dashboard/DashInterViewFAQs" },
-    { name: "History", path: "/dashboard/History" },
+    { name: "Add Task", path: "/dashboard/AddTask", icon: "➕" },
+    { name: "Interview FAQ", path: "/dashboard/AddInterviewFAQ", icon: "❓" },
+    { name: "All FAQs", path: "/dashboard/DashInterViewFAQs", icon: "📋" },
+    { name: "History", path: "/dashboard/History", icon: "🕒" },
   ];
 
-  const activeStyle = "bg-red-500 text-white px-3 py-2 rounded w-full block";
-  const defaultStyle = "px-3 py-2 w-full block";
-
   return (
-    <div className="bg-black min-h-screen px-5 shadow-2xl">
-      <div className="pt-2">
-        <ul className="space-y-1 w-full">
+    <div className="bg-gradient-to-b from-black to-black/20 text-white h-full px-6 py-8">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-rose-600">
+          Dashboard
+        </h2>
+        <ul className="space-y-2">
+          <Link to={'/'}><li className="text-xl font-bold mx-auto pb-2 border-b-[1px]">Home</li></Link>
           {menuItems.map((item, index) => (
-            <li key={index} className="w-full">
+            <li key={index}>
               <NavLink
                 to={item.path}
-                className={({ isActive }) => (isActive ? activeStyle : defaultStyle)}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+                    isActive
+                      ? "bg-[#FB2C36] text-white "
+                      : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                  }`
+                }
               >
-                {item.name}
+                <span className="text-lg">{item.icon}</span>
+                <span className="font-medium">{item.name}</span>
               </NavLink>
             </li>
           ))}
