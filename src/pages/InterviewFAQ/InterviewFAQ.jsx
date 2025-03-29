@@ -1,25 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Filter from "../../components/Custom/Filter";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { AuthContext } from "../../Provider/Provider";
 
 const InterviewFAQ = () => {
   const axiosSecure = useAxiosSecure();
   const [faqs, setFaqs] = useState([]);
   const [selectedFaq, setSelectedFaq] = useState(null);
+  const [loading, setLoading] = useState(false); // Fixed: Added missing state
 
   // Filter states
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedMode, setSelectedMode] = useState("");
 
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
+    if (!user?.email) return; // Avoid unnecessary API calls
+
+    setLoading(true);
+    let isMounted = true; // Cleanup flag
+
     axiosSecure
       .get("/interview-faqs")
       .then((res) => {
-        setFaqs(res.data);
+        if (isMounted) {
+          const userFaqs = res.data.filter((faq) => faq.email === user.email);
+          setFaqs(userFaqs);
+          setLoading(false);
+        }
       })
-      .catch((err) => console.error("Error fetching FAQs:", err));
-  }, [axiosSecure]);
+      .catch((err) => {
+        if (isMounted) {
+          console.error("Error fetching FAQs:", err);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false; // Cleanup on unmount
+    };
+  }, [axiosSecure, user]); // Fixed dependency
 
   // Group FAQs by category
   const groupedFaqs = faqs.reduce((acc, faq) => {
@@ -80,6 +102,9 @@ const InterviewFAQ = () => {
         categories={categories}
         modes={modes}
       />
+
+      {/* Display Loading State */}
+      {loading && <p className="text-center text-gray-300">Loading FAQs...</p>}
 
       {/* Display filtered FAQs */}
       {filteredFaqs.map(

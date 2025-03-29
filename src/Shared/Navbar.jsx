@@ -73,21 +73,21 @@ const Navbar = () => {
       <div className="navbar bg-black text-white shadow-sm px-5 border-b-[1px] border-gray-700 ">
         <div className="navbar-start flex gap-2 justify-between">
           {/* Mobile Menu */}
-          <div className="drawer md:hidden">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content">
-              <label htmlFor="my-drawer" className="btn bg-rose-500 drawer-button font-bold text-2xl">
+          <div className="drawer md:hidden z-10">
+            <input id="my-drawer" type="checkbox" className="drawer-toggle " />
+            <div className="drawer-content ">
+              <label htmlFor="my-drawer" className=" drawer-button font-bold text-2xl">
                 <RiMenuLine />
               </label>
             </div>
             <div className="drawer-side flex flex-col justify-between h-full">
               <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-              <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                <div className="flex justify-between items-center">
+              <ul className="menu bg-black text-white min-h-full w-80 p-4">
+                <div className="flex justify-between items-center ">
                   <div>
-                    <Link to={"/"}><h2 className='text-2xl font-bold'>Home</h2></Link>
+                    <Link to={"/"}><h2 className='text-2xl font-bold '>Home</h2></Link>
                   </div>
-                  <label htmlFor="my-drawer" className="btn bg-rose-600 drawer-button">Close</label>
+                  <label htmlFor="my-drawer" className="bg-white/20 drawer-button px-3 py-1 rounded-lg">Close</label>
                 </div>
                 <div className='grow'>
                   {navBar}
@@ -120,7 +120,7 @@ const Navbar = () => {
             user 
             ?  <div className="dropdown dropdown-end  ">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
+              <div className="w-10 rounded-full ">
                 <img
                   alt="User Avatar"
                   src={user.photoURL} />

@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import Filter from "../../components/Custom/Filter";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import Loading from "../../Shared/Loading";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/Provider";
 
 const DashInterViewFAQs = () => {
   const axiosPublic = useAxiosPublic();
@@ -14,21 +15,27 @@ const DashInterViewFAQs = () => {
   const [selectedMode, setSelectedMode] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const { user } = useContext(AuthContext);
+
+
   const modalRef = useRef(null);
 
   useEffect(() => {
+    if (!user?.email) return; // Avoid unnecessary API calls
     setLoading(true);
     axiosPublic
       .get("/interview-faqs")
       .then((res) => {
-        setFaqs(res.data);
+        const userFaqs = res.data.filter((faq) => faq.email === user.email);
+        setFaqs(userFaqs);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching FAQs:", err);
         setLoading(false);
       });
-  }, [axiosPublic]);
+  }, [axiosPublic, user]); // Changed user.email to user
+  
 
   const categories = [...new Set(faqs.map((faq) => faq.category))];
   const modes = [...new Set(faqs.map((faq) => faq.mode))];
