@@ -31,11 +31,11 @@ const SignIn = () => {
   return (
     <div>
       <div>
-        <form  onSubmit={handleSignIn} action="" className="px-2">
+        <form  onSubmit={handleSignIn} action="" className="px-2 ">
           
           {/* Email */}
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">What is your mail?</legend>
+            <legend className="fieldset-legend text-white">What is your mail?</legend>
 
             <label className="input validator">
               <svg
@@ -63,7 +63,7 @@ const SignIn = () => {
 
           {/* PassWord */}
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">What is your Password?</legend>
+            <legend className="fieldset-legend text-white">What is your Password?</legend>
             <label className="input validator">
               <svg
                 className="h-[1em] opacity-50"

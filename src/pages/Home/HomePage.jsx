@@ -13,7 +13,9 @@ const HomePage = () => {
     <div>
       <div>
 
-        <div className='bg-white'><Hero></Hero></div>
+        <div className='bg-white'>
+          <Hero></Hero>
+        </div>
 
         <div className='mt-5'>
           <ShowEmptyTask></ShowEmptyTask>
@@ -28,7 +30,7 @@ const HomePage = () => {
         </div>
 
 
-        <Loading></Loading>
+        {/* <Loading></Loading> */}
         
 
 

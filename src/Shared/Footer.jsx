@@ -7,10 +7,10 @@ import FooterImg from "../assets/diary.png"
 
 const Footer = () => {
   return (
-    <div>
+    <div className=''>
       <div className='border-t-[1px] border-gray-800'>
 
-        <div className='flex flex-col md:flex-row justify-between items-center bg-black text-white p-5'>
+        <div className='flex flex-col md:flex-row justify-between items-center p-5'>
           
           {/* section */}
           <div className='w-[50%]  md:w-[100%]'>
@@ -39,10 +39,10 @@ const Footer = () => {
             </div>
             
             <div className='flex gap-2 text-4xl'>
-             <a href=""> <FaSquareGithub /> </a>
-             <a href=""> <FaLinkedin /> </a>
-             <a href=""> <RiPassportFill /> </a>
-             <a href=""> <FaSquareFacebook /> </a>
+             <a href="https://github.com/rohan26ir"> <FaSquareGithub /> </a>
+             <a href="https://www.linkedin.com/in/rohan26ir/"> <FaLinkedin /> </a>
+             <a href="https://rohansfolio.web.app/"> <RiPassportFill /> </a>
+             <a href="https://www.facebook.com/mahedul23"> <FaSquareFacebook /> </a>
             </div>
           
             </div>

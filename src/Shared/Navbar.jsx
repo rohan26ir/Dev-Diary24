@@ -8,7 +8,7 @@ const Navbar = () => {
   const {user, logOut} = useContext(AuthContext);
 
 
-  console.log("Nab",user);
+  // console.log("Nab",user);
 
   // Define activeStyle as a string with the necessary classes
   const activeStyle = "bg-white/20 text-white px-3 py-2 rounded";
@@ -19,33 +19,35 @@ const Navbar = () => {
         Home
       </NavLink>
     </li>
+    {user && 
     <li>
-      <details className=''>
-        <summary className=''>Interview</summary>
-        <ul className="p-2 text-white bg-[#FB2C36]/60">
-          <li>
-            <NavLink to={"/my-InterviewFAQ"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
-            InterviewFAQ
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/interview/InterParsonal"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
-              InterPer
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/interview/theory"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
-              Theory
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/interview/problem-solving"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
-              PSol
-            </NavLink>
-          </li>
-        </ul>
-      </details>
-    </li>
+    <details className=''>
+      <summary className=''>My Pocket</summary>
+      <ul className="p-2 text-white bg-black/80 top-10 z-30">
+        <li>
+          <NavLink to={"/my-InterviewFAQ"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
+          Dev FAQ
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={"/interview/InterParsonal"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
+            InterPer
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={"/interview/theory"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
+            Theory
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={"/interview/problem-solving"} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
+            PSol
+          </NavLink>
+        </li>
+      </ul>
+    </details>
+  </li>
+    }
     <li>
       <NavLink to={'/note'} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
         Note
@@ -58,19 +60,19 @@ const Navbar = () => {
     </li>
     <li>
       <NavLink to={'/link'} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
-        Link
+        Lists
       </NavLink>
     </li>
     <li>
       <NavLink to={'/InterviewFAQs'} className={({ isActive }) => isActive ? activeStyle : "px-3 py-2"}>
-      InterviewFAQs
+      DevFAQs
       </NavLink>
     </li>
   </>;
 
   return (
     <div className=''>
-      <div className="navbar bg-black text-white shadow-sm px-5 border-b-[1px] border-gray-700 ">
+      <div className="navbar shadow-sm px-5 border-b-[1px] border-gray-700 ">
         <div className="navbar-start flex gap-2 justify-between">
           {/* Mobile Menu */}
           <div className="drawer md:hidden z-10">
