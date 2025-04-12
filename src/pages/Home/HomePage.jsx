@@ -6,6 +6,7 @@ import { AuthContext } from '../../Provider/Provider';
 import HomeWork from './HomeWork/HomeWork';
 import ShowEmptyTask from '../../Dashboard/ShowTasks/ShowEmptyTask';
 import Loading from '../../Shared/Loading';
+import Support from './components/Support';
 
 const HomePage = () => {
   const {user} =useContext(AuthContext)
@@ -36,6 +37,10 @@ const HomePage = () => {
 
         <div className='pt-5'>
           <HomeWork></HomeWork>
+        </div>
+
+        <div className=''>
+          <Support></Support>
         </div>
 
       </div>
