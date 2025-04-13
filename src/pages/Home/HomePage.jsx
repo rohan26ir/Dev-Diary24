@@ -7,6 +7,7 @@ import HomeWork from './HomeWork/HomeWork';
 import ShowEmptyTask from '../../Dashboard/ShowTasks/ShowEmptyTask';
 import Loading from '../../Shared/Loading';
 import Support from './components/Support';
+import Counter from './components/Counter';
 
 const HomePage = () => {
   const {user} =useContext(AuthContext)
@@ -16,6 +17,10 @@ const HomePage = () => {
 
         <div className='bg-white'>
           <Hero></Hero>
+        </div>
+
+        <div>
+          <Counter></Counter>
         </div>
 
         <div className='mt-5'>
