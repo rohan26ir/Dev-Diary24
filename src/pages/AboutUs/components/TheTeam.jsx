@@ -14,36 +14,54 @@ const TheTeam = () => {
     { id: 5, image: teamP5, name: "Rohan", role: "Full Stack Developer" },
   ];
   return (
-    <div className="flex flex-col md:flex-row gap-5 ">
+    <div>
+
+    <div className='block lg:hidden space-y-2'>
+        <p className="font-bold text-white/40 text-center">The Team</p>
+        <h2 className="text-4xl text-white/80 mb-2 font-bold text-center">
+        Our creative team
+        </h2>
+      </div>
+
+
+<div className="flex flex-col lg:flex-row gap-5 ">
+      
       {/* images Section */}
-      <div className="grid gap-2 w-1/2  py-8">
-  {/* First row with 2 centered images */}
-  <div className="col-span-2 flex justify-center gap-2">
-    {teamMembers.slice(0, 2).map((member) => (
-      <div key={member.id} className="flex justify-center items-center border-8 rounded-full hover:border-[#E22831] transition-all duration-300 ease-in-out">
-        <img src={member.image} alt="" className="h-28" />
-      </div>
-    ))}
-  </div>
+      <div className="grid gap-2 w-full lg:w-1/2  py-8">
+        {/* First row with 2 centered images */}
+        <div className="col-span-2 flex justify-center gap-2">
+          {teamMembers.slice(0, 2).map((member) => (
+            <div
+              key={member.id}
+              className="flex justify-center items-center border-8 rounded-full hover:border-[#E22831] transition-all duration-300 ease-in-out"
+            >
+              <img src={member.image} alt="" className="h-20 md:h-28" />
+            </div>
+          ))}
+        </div>
 
-  {/* Second row with 3 images */}
-  <div className="col-span-2 flex justify-center gap-2">
-    {teamMembers.slice(2).map((member) => (
-      <div key={member.id} className="flex justify-center items-center border-8 rounded-full hover:border-[#E22831] transition-all duration-300 ease-in-out ">
-        <img src={member.image} alt="" className="h-32" />
+        {/* Second row with 3 images */}
+        <div className="col-span-2 flex justify-center gap-2">
+          {teamMembers.slice(2).map((member) => (
+            <div
+              key={member.id}
+              className="flex justify-center items-center border-8 rounded-full hover:border-[#E22831] transition-all duration-300 ease-in-out "
+            >
+              <img src={member.image} alt="" className="h-24 md:h-32" />
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
-
 
       {/* text section */}
-      <div className="space-y-2 w-1/2">
-        <p className="font-bold text-white/40 w-fit">The Team</p>
-        <h2 className="text-8xl text-white/80 leading-20 font-bold max-w-xl ">
+      <div className="space-y-2 w-full lg:w-1/2 my-auto">
+        <div className="hidden lg:block">
+         <p className="font-bold text-white/40 w-fit">The Team</p>
+         <h2 className="text-6xl text-white/80 leading-14 font-bold max-w-md ">
           Our creative team
         </h2>
-        <p className="text-gray-300 max-w-xl">
+        </div>
+        <p className="text-gray-300 lg:max-w-xl">
           <span className="text-2xl font-bold">W</span>e are a group of
           passionate designers, developers, and strategists dedicated to
           crafting beautiful and functional digital experiences. Our team
@@ -51,6 +69,7 @@ const TheTeam = () => {
           precision and purpose.
         </p>
       </div>
+    </div>
     </div>
   );
 };
