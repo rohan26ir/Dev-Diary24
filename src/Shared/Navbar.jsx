@@ -100,6 +100,24 @@ const Navbar = () => {
           DevFAQs
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to={'/about'}
+          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
+          onClick={closeDrawer}
+        >
+          About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={'/contact'}
+          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
+          onClick={closeDrawer}
+        >
+          Contact
+        </NavLink>
+      </li>
     </>
   );
 

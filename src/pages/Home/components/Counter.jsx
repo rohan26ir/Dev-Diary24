@@ -40,7 +40,12 @@ const Counter = () => {
   }, []);
 
   return (
-    <div className='bg-white/10 py-6'>
+    <div
+      className='py-6'
+      style={{
+        background: 'linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.2) 60%, rgba(255, 255, 255, 0.1) 80%, rgba(255, 255, 255, 0.1) 100%)',
+      }}
+    >
       <div className='w-11/12 mx-auto'>
         <Swiper
           spaceBetween={16}

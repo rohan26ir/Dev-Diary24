@@ -22,6 +22,8 @@ import AddInterviewFAQ from "../Dashboard/InterviewFAQ/AddInterviewFAQ";
 import InterviewFAQ from "../pages/InterviewFAQ/InterviewFAQ";
 import InterviewFAQspublic from "../pages/InterviewFAQ/InterviewFAQspublic";
 import DashInterViewFAQs from "../Dashboard/InterViewFAQs/DashInterViewFAQs";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 
 const Router = createBrowserRouter([
@@ -33,6 +35,14 @@ const Router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage></HomePage>
+      },
+      {
+        path: "/about",
+        element: <AboutUs></AboutUs>
+      },
+      {
+        path: "/contact",
+        element: <ContactUs></ContactUs>
       },
       {
         path: "/account",
