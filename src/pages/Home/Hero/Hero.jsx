@@ -20,7 +20,7 @@ const Hero = () => {
             <p className='text-lg'>Dev Diary24 is your all-in-one digital workspace. <br />Take daily notes, manage personal and work-related <br />tasks, track deadlines, and store essential FAQs <br /> effortlessly. Stay organized and boost your productivity <br />like never before.</p>
 
             {user 
-             ? <Link to={'/dashboard'}><button className='bg-[#FB2C36] px-3 py-2 rounded-lg cursor-pointer font-bold'>Deshboard</button></Link>  
+             ? <Link to={'/ai-Interview'}><button className='bg-[#FB2C36] px-3 py-2 rounded-lg cursor-pointer font-bold'>Ai Mock Interview</button></Link>  
              : <Link to={'/Account/SignIn'}><button className='bg-[#FB2C36] px-3 py-2 rounded-lg cursor-pointer font-bold'>Sign Up</button></Link>
           }
 

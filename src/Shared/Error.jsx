@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import errorImg from '../assets/error.webp'
 
 const Error = () => {
   return (
@@ -7,11 +8,11 @@ const Error = () => {
       <div className='w-full max-w-3xl mx-auto flex flex-col gap-6 items-center text-center'>
 
         {/* Error Number */}
-        <div className='relative inline-block'>
-          <h2 className='text-[120px] sm:text-[150px] md:text-[180px] lg:text-[200px] font-bold leading-none'>
-            40<span className='inline-block -rotate-[30deg] -ml-4 sm:-ml-6 md:-ml-8 animate-pulse'>4</span>
-          </h2>
-          <div className='border-b-4 border-gray-600 w-full flex justify-center'></div>
+        <div className=''>
+          <img 
+          src={errorImg} 
+          className='w-auto h-40 md:w-auto md:h-80'
+          alt="" />
         </div>
 
         {/* Error Message */}
@@ -21,7 +22,7 @@ const Error = () => {
 
         {/* Back to Home Button */}
         <Link to={'/'}>
-          <button className='px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-300'>
+          <button className='px-6 py-3 bg-[#FB2C36] hover:bg-[#FB2C36]/90 text-white font-semibold rounded-lg shadow-md transition-all duration-30 cursor-pointer'>
             Go Back To Home
           </button>
         </Link>

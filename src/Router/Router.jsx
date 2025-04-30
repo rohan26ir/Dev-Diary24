@@ -7,9 +7,7 @@ import HomePage from "../pages/Home/HomePage";
 import NotesPage from "../pages/Notes/NotesPage";
 import CodePage from "../pages/Code/CodePage";
 import LinkPage from "../pages/Link/LinkPage";
-// import InterParsonal from "../pages/Interview/InterParsonal/InterParsonal";
 import Theory from "../pages/Interview/Theory/Theory";
-// import ProblemSolving from "../pages/Interview/PSol/ProblemSolving";
 import SignIn from "../Account/SignIn/SignIn";
 import SignUp from "../Account/SignUp/SignUp";
 import Account from "../Account/Account";
@@ -24,6 +22,7 @@ import InterviewFAQspublic from "../pages/InterviewFAQ/InterviewFAQspublic";
 import DashInterViewFAQs from "../Dashboard/InterViewFAQs/DashInterViewFAQs";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";
+import AiInterview from "../pages/Ai/AiInterview/AiInterview";
 
 
 const Router = createBrowserRouter([
@@ -61,6 +60,10 @@ const Router = createBrowserRouter([
       {
         path: "/my-InterviewFAQ",
         element: <PrivateRoute><InterviewFAQ></InterviewFAQ></PrivateRoute>
+      },
+      {
+        path: "/ai-Interview",
+        element: <PrivateRoute><AiInterview></AiInterview></PrivateRoute>
       },
       {
         path: "/InterviewFAQs",

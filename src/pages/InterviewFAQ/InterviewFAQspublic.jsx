@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Filter from "../../components/Custom/Filter";
+import { Link } from "react-router-dom";
 
 const InterviewFAQ = () => {
   const axiosPublic = useAxiosPublic();
@@ -66,9 +67,22 @@ const InterviewFAQ = () => {
 
   return (
     <div className="container mx-auto p-4 bg-black text-white min-h-screen">
-      <h2 className="text-2xl font-bold text-white mb-6 border-b-2 border-[#FB2C36] pb-2">
+
+      
+
+      <div className="flex justify-between items-center mb-4 border-b-2 border-[#FB2C36] pb-2">
+      <div>
+      <h2 className="text-2xl font-bold text-white ">
         Interview FAQs
       </h2>
+      </div>
+
+      <div>
+        <Link to={'/ai-Interview'}><button className="bg-[#FB2C36] px-2 py-1 rounded-lg cursor-pointer ">Ai Interview</button></Link>
+      </div>
+      </div>
+
+      
 
       {/* Filter Component */}
       <Filter
