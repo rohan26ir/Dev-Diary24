@@ -1,7 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const DashNav = () => {
+const DashNav = ({ handleSideBar }) => {
+  const addNew = [
+    { name: "Add Task", path: "/dashboard/AddTask" },
+    { name: "Interview FAQ", path: "/dashboard/AddInterviewFAQ" },
+  ];
+
   const menuItems = [
     { name: "Add Task", path: "/dashboard/AddTask", icon: "➕" },
     { name: "Interview FAQ", path: "/dashboard/AddInterviewFAQ", icon: "❓" },
@@ -10,13 +15,15 @@ const DashNav = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-black to-black/20 text-white h-full px-6 py-8">
+    <div className="bg-gradient-to-b from-black to-black text-white h-full pb-8 shadow-2xl border-[1px] border-white/20 flex flex-col items-center">
+      <div
+        className="border-b-[1px] border-white/20 h-10 w-full flex justify-center items-center cursor-pointer text-2xl font-bold gap-2 mb-5"
+        onClick={handleSideBar}
+      >
+        Dashboard
+      </div>
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-rose-600">
-          Dashboard
-        </h2>
         <ul className="space-y-2">
-          <Link to={'/'}><li className="text-xl font-bold mx-auto pb-2 border-b-[1px]">Home</li></Link>
           {menuItems.map((item, index) => (
             <li key={index}>
               <NavLink

@@ -1,4 +1,3 @@
-// Dashboard.jsx
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
@@ -6,6 +5,8 @@ import { IoMdCloseCircle } from "react-icons/io";
 
 import DashNav from "./Shared/DashNav";
 import DashNavShort from "./Shared/DashNavShort";
+import { MdOutlineMailOutline } from "react-icons/md";
+import { HiUser } from "react-icons/hi2";
 
 const Dashboard = () => {
   const [isShortNav, setIsShortNav] = useState(false);
@@ -19,32 +20,42 @@ const Dashboard = () => {
       {/* Desktop Sidebar */}
       <div
         className={`hidden md:block h-screen sticky top-0 transition-all duration-300 ${
-          isShortNav ? "w-20" : "w-72"
+          isShortNav ? "w-20" : "w-48"
         }`}
       >
-        {isShortNav ? <DashNavShort /> : <DashNav />}
+        {isShortNav ? (
+          <DashNavShort handleSideBar={handleSideBar} />
+        ) : (
+          <DashNav handleSideBar={handleSideBar} />
+        )}
       </div>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header with Toggle */}
-        <div className="bg-black border-b sticky top-0 border-white/20 px-4 flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold text-[#C9232B] md:hidden">
+        <div className="bg-black border-b-[1px] sticky top-0 border-white/20 px-4 flex justify-between items-center">
+          <Link to="/" className="text-xl font-bold text-[#CReader9232B] md:hidden">
             Dashboard
           </Link>
-          <div className="flex items-center gap-4">
-            <button
-              className="hidden md:block text-2xl p-2 hover:bg-gray-700 rounded-full transition-colors"
-              onClick={handleSideBar}
-            >
-              <BsLayoutTextSidebarReverse />
-            </button>
-            <label
-              htmlFor="my-drawer"
-              className="md:hidden text-2xl p-2 hover:bg-gray-700 rounded-full transition-colors"
-            >
-              <BsLayoutTextSidebarReverse />
-            </label>
+          <div className="flex justify-between items-center h-10 w-[100%]">
+            {/* start */}
+            <div>
+            <h2 className="text-xl font-bold">DevDiary24</h2>
+
+            </div>
+            {/* center */}
+            {/* <div>
+              jdjf
+            </div> */}
+            {/* end */}
+            <div className="flex items-center gap-2">
+              <div className="p-2 text-xl bg-white/20 rounded-lg">
+               <MdOutlineMailOutline />
+              </div>
+              <div className="p-2 text-xl bg-white/20 rounded-lg">
+               <HiUser />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -65,7 +76,7 @@ const Dashboard = () => {
                   <IoMdCloseCircle />
                 </label>
               </div>
-              <DashNav />
+              <DashNav handleSideBar={handleSideBar} />
             </div>
           </div>
         </div>

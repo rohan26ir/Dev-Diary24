@@ -77,10 +77,6 @@ const Router = createBrowserRouter([
         path: "/interview/theory",
         element: <Theory></Theory>
       },
-      // {
-      //   path: "/interview/problem-solving",
-      //   element: <ProblemSolving></ProblemSolving>
-      // },
       {
         path: "/note",
         element: <NotesPage></NotesPage>
