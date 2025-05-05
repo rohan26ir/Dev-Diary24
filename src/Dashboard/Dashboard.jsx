@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { IoMdCloseCircle } from "react-icons/io";
-
-import DashNav from "./Shared/DashNav";
-import DashNavShort from "./Shared/DashNavShort";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { HiUser } from "react-icons/hi2";
 
+import DashNav from "./Shared/DashNav";
+import DashNavShort from "./Shared/DashNavShort";
+import DbData from "./DbData";
+
 const Dashboard = () => {
   const [isShortNav, setIsShortNav] = useState(false);
+  const location = useLocation(); // Get the current route
 
   const handleSideBar = () => {
     setIsShortNav((prev) => !prev);
   };
+
+  // Check if the current route is exactly "/dashboard"
+  const isDashboardRoute = location.pathname.toLowerCase() === "/dashboard";
 
   return (
     <div className="min-h-screen flex bg-gray-900 text-white">
@@ -34,27 +39,33 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col">
         {/* Header with Toggle */}
         <div className="bg-black border-b-[1px] sticky top-0 border-white/20 px-4 flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold text-[#CReader9232B] md:hidden">
+          <Link
+            to="/"
+            className="text-xl font-bold text-[#C9232B] md:hidden"
+          >
             Dashboard
           </Link>
           <div className="flex justify-between items-center h-10 w-[100%]">
             {/* start */}
             <div>
-            <h2 className="text-xl font-bold">DevDiary24</h2>
-
+              <Link to="/">
+                <h2 className="text-xl font-bold">DevDiary24</h2>
+              </Link>
             </div>
-            {/* center */}
-            {/* <div>
-              jdjf
-            </div> */}
             {/* end */}
             <div className="flex items-center gap-2">
               <div className="p-2 text-xl bg-white/20 rounded-lg">
-               <MdOutlineMailOutline />
+                <MdOutlineMailOutline />
               </div>
               <div className="p-2 text-xl bg-white/20 rounded-lg">
-               <HiUser />
+                <HiUser />
               </div>
+              <label
+                htmlFor="my-drawer"
+                className="md:hidden text-2xl p-2 hover:bg-gray-700 rounded-full transition-colors"
+              >
+                <BsLayoutTextSidebarReverse />
+              </label>
             </div>
           </div>
         </div>
@@ -83,7 +94,7 @@ const Dashboard = () => {
 
         {/* Content Area */}
         <div className="flex-1 overflow-y-auto bg-black">
-          <Outlet />
+          {isDashboardRoute ? <DbData /> : <Outlet />}
         </div>
       </div>
     </div>

@@ -23,7 +23,8 @@ const DashNav = ({ handleSideBar }) => {
         Dashboard
       </div>
       <div className="space-y-2">
-        <ul className="space-y-2">
+        <Link to={"/dashboard"}><p className="m-4 text-xl font-bold">Account Panel</p></Link>
+        <ul className="space-y-2  border-t-[1px] border-white/30">
           {menuItems.map((item, index) => (
             <li key={index}>
               <NavLink
