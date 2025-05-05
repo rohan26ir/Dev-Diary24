@@ -1,33 +1,28 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import React, { useContext, useState, useRef, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { RiMenuLine } from "react-icons/ri";
+import { IoClose } from "react-icons/io5";
 import { AuthContext } from '../Provider/Provider';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const drawerRef = useRef(null); // Reference to the drawer content
-  const checkboxRef = useRef(null); // Reference to the checkbox input
-  const location = useLocation(); // Track URL changes
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuRef = useRef(null); // Reference to the mobile menu container
 
-  // Define activeStyle as a string with the necessary classes
+  // Define activeStyle
   const activeStyle = "bg-white/20 text-white px-3 py-2 rounded";
 
-  // Close drawer function
-  const closeDrawer = () => {
-    if (checkboxRef.current) {
-      checkboxRef.current.checked = false;
-    }
+  // Toggle mobile menu
+  const toggleMobileMenu = (e) => {
+    e.stopPropagation(); // Prevent triggering outside click handler
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Handle clicks outside the drawer
+  // Close menu on click outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        drawerRef.current &&
-        !drawerRef.current.contains(event.target) &&
-        checkboxRef.current.checked
-      ) {
-        closeDrawer();
+      if (menuRef.current && !menuRef.current.contains(event.target) && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
       }
     };
 
@@ -35,95 +30,90 @@ const Navbar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
-
-  // Close drawer on URL change
-  useEffect(() => {
-    closeDrawer();
-  }, [location]);
+  }, [isMobileMenuOpen]);
 
   const navBar = (
     <>
       <li>
         <NavLink
           to={'/'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer} // Close drawer on click
+          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+          onClick={() => setIsMobileMenuOpen(false)}
         >
           Home
         </NavLink>
       </li>
       {user && (
         <li>
-        <NavLink
-          to={'/my-InterviewFAQ'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer} // Close drawer on click
-        >
-        Dev FAQ
-        </NavLink>
+          <NavLink
+            to={'/my-InterviewFAQ'}
+            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Dev FAQ
+          </NavLink>
         </li>
       )}
       <li>
         <NavLink
           to={'/note'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer}
+          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+          onClick={() => setIsMobileMenuOpen(false)}
         >
           Note
         </NavLink>
       </li>
       <li>
         <NavLink
-          to={'/code'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer}
-        >
-          Code
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={'/link'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer}
-        >
-          Lists
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={'/InterviewFAQs'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer}
-        >
-          DevFAQs
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={'/about'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer}
-        >
-          About
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={'/contact'}
-          className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2")}
-          onClick={closeDrawer}
-        >
-          Contact
-        </NavLink>
-      </li>
-    </>
-  );
+            to={'/code'}
+            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Code
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={'/link'}
+            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Lists
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={'/InterviewFAQs'}
+            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            DevFAQs
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={'/about'}
+            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            About
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to={'/contact'}
+            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Contact
+          </NavLink>
+        </li>
+      </>
+    );
 
   return (
     <div className="">
-      <div className="navbar shadow-sm px-5 border-b-[1px] border-gray-700">
+      <div className="navbar shadow-sm px-5 border-b-[1px] border-gray-700 bg-black">
         {/* Navbar Start */}
         <div className="navbar-start flex items-center">
           <Link to={"/"} className="text-xl font-bold text-[#C70039] md:text-white">
@@ -133,7 +123,7 @@ const Navbar = () => {
 
         {/* Navbar Center (Desktop Menu) */}
         <div className="navbar-center hidden md:flex">
-          <ul className="menu menu-horizontal px-1 gap-1">{navBar}</ul>
+          <ul className="menu menu-horizontal px-1 gap-1 text-white">{navBar}</ul>
         </div>
 
         {/* Navbar End */}
@@ -168,8 +158,8 @@ const Navbar = () => {
                 </ul>
               </div>
             ) : (
-              <Link to={"/Account/SignIn"} onClick={closeDrawer}>
-                <button className="bg-[#FB2C36]/90 hover:bg-[#FB2C36]/80 px-3 py-2 rounded-sm">
+              <Link to={"/Account/SignIn"}>
+                <button className="bg-[#FB2C36]/90 hover:bg-[#FB2C36]/80 px-3 py-2 rounded-sm text-white">
                   Sign Up
                 </button>
               </Link>
@@ -178,81 +168,68 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden">
-            <div className="drawer z-10">
-              <input
-                id="my-drawer"
-                type="checkbox"
-                className="drawer-toggle"
-                ref={checkboxRef}
-              />
-              <div className="drawer-content">
-                <label
-                  htmlFor="my-drawer"
-                  className="drawer-button font-bold text-2xl cursor-pointer"
-                >
-                  <RiMenuLine />
-                </label>
-              </div>
-              <div className="drawer-side flex flex-col justify-between h-full">
-                <label
-                  htmlFor="my-drawer"
-                  aria-label="close sidebar"
-                  className="drawer-overlay"
-                ></label>
-                <ul
-                  className="menu bg-black text-white min-h-full w-80 p-4"
-                  ref={drawerRef}
-                >
-                  <div className="flex justify-between items-center mb-4">
-                  <Link to={"/"} className="text-xl font-bold text-[#C70039] md:text-white">
-                    DevDiary24
-                  </Link>
-                    <label
-                      htmlFor="my-drawer"
-                      className="bg-white/20 px-3 py-1 rounded-lg cursor-pointer"
-                    >
-                      Close
-                    </label>
-                  </div>
-                  <div className="grow">
-                    {navBar}
-                    {user ? (
-                      <ul className="mt-4">
-                        <li>
-                          <a className="justify-between">
-                            Profile
-                            <span className="badge">New</span>
-                          </a>
-                        </li>
-                        <li>
-                          <NavLink
-                            to={'/dashboard/AddTask'}
-                            className="pl-2.5"
-                            onClick={closeDrawer}
-                          >
-                            Dashboard
-                          </NavLink>
-                        </li>
-                        <li>
-                          <button onClick={() => { logOut(); closeDrawer(); }}>
-                            Logout
-                          </button>
-                        </li>
-                      </ul>
-                    ) : (
-                      <Link to={"/Account/SignIn"} onClick={closeDrawer}>
-                        <button className="bg-[#FB2C36]/90 hover:bg-[#FB2C36]/80 px-3 py-2 rounded-sm w-full mt-4">
-                          Sign Up
-                        </button>
-                      </Link>
-                    )}
-                  </div>
-                </ul>
-              </div>
-            </div>
+            <p
+              className="font-bold text-2xl cursor-pointer text-white"
+              onClick={toggleMobileMenu}
+            >
+              {isMobileMenuOpen ? <IoClose className='text-3xl'/> : <RiMenuLine />}
+            </p>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div
+          className={`md:hidden fixed top-16 left-0 w-full bg-black z-50 flex flex-col items-center justify-center transition-transform duration-300 transform ${
+            isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
+          }`}
+          ref={menuRef}
+        >
+          <ul className="flex flex-col w-full items-center gap-4 text-white py-4">
+            {navBar}
+            {user ? (
+              <ul className="flex flex-col items-center gap-4 mt-4">
+                <li>
+                  <a className="justify-between text-white">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <NavLink
+                    to={'/dashboard/AddTask'}
+                    className="pl-2.5 text-white"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      logOut();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="text-white"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            ) : (
+              <Link
+                to={'/Account/SignIn'}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <button className="bg-[#FB2C36]/90 hover:bg-[#FB2C36]/80 px-3 py-2 rounded-sm w-full mt-4 text-white">
+                  Sign Up
+                </button>
+              </Link>
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

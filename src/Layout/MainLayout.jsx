@@ -8,7 +8,7 @@ const MainLayout = () => {
     <div className='bg-black text-white'>
 
       <div className='container mx-auto'>
-      <header className='sticky top-0 z-50 bg-black/60 backdrop-blur-md'>
+      <header className='sticky top-0 z-40 bg-black/60 backdrop-blur-md'>
         <Navbar></Navbar>
       </header>
 
