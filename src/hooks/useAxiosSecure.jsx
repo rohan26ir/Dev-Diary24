@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/Provider";
 
 const axiosSecure = axios.create({
     baseURL: 'https://devdiary-server.vercel.app',
+    withCredentials: true, // Add this to support cookies or sessions
 });
 
 const useAxiosSecure = () => {

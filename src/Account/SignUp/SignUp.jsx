@@ -32,7 +32,7 @@ const SignUp = () => {
     const file = e.target.files[0];
     if (file) {
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append("photoURL", file);
 
       try {
         const response = await axiosPublic.post(imageHostingAPI, formData, {
@@ -54,9 +54,9 @@ const SignUp = () => {
     setError("");
     setSuccessMessage("");
 
-    const { name, phone, email, password } = formData;
+    const { email ,name, password } = formData;
 
-    if (!name || !phone || !email || !password || !image) {
+    if (!name || !email || !password || !photoURL) {
       setError("All fields are required!");
       return;
     }
@@ -68,11 +68,12 @@ const SignUp = () => {
 
       // Prepare user data
       const userInfo = {
-        name,
-        phone,
         email,
-        image, // Include image URL in the user data
+        name,
+        photoURL, // Include image URL in the user data
       };
+
+      // console.log("userInfo", userInfo);
 
       // Send user data to the backend
       const res = await axiosPublic.post("/users", userInfo);

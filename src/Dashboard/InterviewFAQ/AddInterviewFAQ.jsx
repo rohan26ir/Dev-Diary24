@@ -8,15 +8,14 @@ const AddInterviewFAQ = () => {
     const axiosSecure = useAxiosSecure();
 
     const questionTypes = [
-        "HTML", "CSS", "JavaScript", "React.js", "Next.js", "Vue.js", "Angular",
-        "Svelte", "Node.js", "Express.js", "NestJS", "MongoDB", "MySQL",
-        "PostgreSQL", "Firebase", "REST API", "GraphQL", "Web Security",
-        "TypeScript", "Data Structures & Algorithms", "System Design",
-        "Design Patterns", "Performance Optimization", "DevOps", "Testing & Debugging"
+        "Interpersonal", "HTML", "CSS", "JavaScript", "React.js",
+        "Next.js", "Node.js", "Express.js", "MongoDB", "MySQL",
+        "Firebase", "REST API", "Error", "Web Security",
+        "Performance Optimization", "DevOps", 
     ];
 
     const questionModes = [
-        "Beginner", "Basic", "Easy", "Medium", "Normal", "Hard", "Advanced",
+        "Easy", "Medium", "Hard", "Advanced",
         "Problem-Solving", "Complex", "Expert"
     ];
 
@@ -99,15 +98,15 @@ const AddInterviewFAQ = () => {
             <form onSubmit={handleSubmit}>
                 <div className='text-gray-200 p-5 shadow-2xl rounded-lg'>
                     <div className='flex justify-center'>
-                        <h2 className='text-2xl font-bold'>Interview FAQ</h2>
+                        <h2 className='text-2xl font-bold'>Frequently Asked Question</h2>
                     </div>
 
-                    <div className='flex gap-4'>
+                    <div className='flex flex-col md:flex-row gap-4'>
                         <fieldset className="fieldset w-full">
                             <legend className="fieldset-legend text-white">Category</legend>
                             <select 
                                 name="category" 
-                                className="select bg-black text-white" 
+                                className="select bg-black text-white w-full" 
                                 value={category}
                                 onChange={handleCategoryChange}
                                 required
@@ -117,14 +116,14 @@ const AddInterviewFAQ = () => {
                                     <option key={index} value={type}>{type}</option>
                                 ))}
                             </select>
-                            <span className="fieldset-label text-black">Select</span>
+                            <span className="fieldset-label text-white/60">Select</span>
                         </fieldset>
 
                         <fieldset className="fieldset w-full">
                             <legend className="fieldset-legend text-white">Mode</legend>
                             <select 
                                 name="mode" 
-                                className="select bg-black text-white" 
+                                className="select bg-black text-white w-full" 
                                 value={mode}
                                 onChange={handleModeChange}
                                 required
@@ -134,7 +133,7 @@ const AddInterviewFAQ = () => {
                                     <option key={index} value={mode}>{mode}</option>
                                 ))}
                             </select>
-                            <span className="fieldset-label text-black">Select</span>
+                            <span className="fieldset-label text-white/60">Select</span>
                         </fieldset>
                     </div>
 
@@ -149,14 +148,14 @@ const AddInterviewFAQ = () => {
                             onChange={handleQuestionChange}
                             required
                         />
-                        <p className="fieldset-label text-black">Write a Question</p>
+                        <p className="fieldset-label text-white/60">Write a Question</p>
                     </fieldset>
 
                     <fieldset className="fieldset">
                         <legend className="fieldset-legend text-white">What is your Answer?</legend>
                         <textarea
                             name="answer"
-                            className="w-[100%] h-32 p-2 bg-black text-white"
+                            className="w-full h-32 p-2 bg-black text-white"
                             placeholder="Type here"
                             value={answer}
                             onChange={handleAnswerChange}

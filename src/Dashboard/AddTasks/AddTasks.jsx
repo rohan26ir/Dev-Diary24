@@ -10,7 +10,7 @@ const AddTasks = () => {
   // Define state for form fields
   const [taskData, setTaskData] = useState({
     name: '',
-    subject: '',
+    // subject: '',
     title: '',
     description: '',
     startDateTime: '',
@@ -60,7 +60,7 @@ const AddTasks = () => {
       setMessage('Task created successfully!');
       setTaskData({
         name: '',
-        subject: '',
+        // subject: '',
         title: '',
         description: '',
         startDateTime: '',
@@ -87,7 +87,10 @@ const AddTasks = () => {
       <div className="max-w-3xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-6">Add New Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="form-control">
+
+
+          <div className='flex flex-col sm:flex-row justify-between gap-5'>
+          <div className="form-control w-full">
             <label htmlFor="name" className="label">Institution/Medium</label>
             <input
               type="text"
@@ -99,8 +102,25 @@ const AddTasks = () => {
               required
             />
           </div>
+          <div className="form-control w-full">
+            <label htmlFor="status" className="label">Status</label>
+            <select
+              id="status"
+              name="status"
+              value={taskData.status}
+              onChange={handleInputChange}
+              className="select select-bordered w-full text-black"
+              required
+            >
+              <option value="">Select Status</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+              <option value="in-progress">In Progress</option>
+            </select>
+          </div>
+          </div>
 
-          <div className="form-control">
+          {/* <div className="form-control">
             <label htmlFor="subject" className="label">Subject</label>
             <input
               type="text"
@@ -111,7 +131,7 @@ const AddTasks = () => {
               className="input input-bordered w-full  text-black"
               required
             />
-          </div>
+          </div> */}
 
           <div className="form-control">
             <label htmlFor="title" className="label">Title</label>
@@ -138,7 +158,8 @@ const AddTasks = () => {
             />
           </div>
 
-          <div className="form-control">
+          <div className='flex flex-col sm:flex-row justify-between gap-5'>
+          <div className="form-control w-full">
             <label htmlFor="startDateTime" className="label">Start Date & Time</label>
             <input
               type="datetime-local"
@@ -151,7 +172,7 @@ const AddTasks = () => {
             />
           </div>
 
-          <div className="form-control">
+          <div className="form-control w-full">
             <label htmlFor="endDateTime" className="label">End Date & Time</label>
             <input
               type="datetime-local"
@@ -163,6 +184,7 @@ const AddTasks = () => {
               required
             />
           </div>
+          </div>
 
           <div className="form-control">
             <label htmlFor="url" className="label">URL</label>
@@ -173,31 +195,15 @@ const AddTasks = () => {
               value={taskData.url}
               onChange={handleInputChange}
               className="input input-bordered w-full text-black"
-              required
             />
           </div>
 
-          <div className="form-control">
-            <label htmlFor="status" className="label">Status</label>
-            <select
-              id="status"
-              name="status"
-              value={taskData.status}
-              onChange={handleInputChange}
-              className="select select-bordered w-full text-black"
-              required
-            >
-              <option value="">Select Status</option>
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
-              <option value="in-progress">In Progress</option>
-            </select>
-          </div>
+          
 
           <div className="form-control mt-4 text-black">
             <button
               type="submit"
-              className={`btn ${loading ? 'btn-disabled' : 'btn-primary'} w-full`}
+              className={`px-3 py-2 rounded-lg cursor-pointer ${loading ? 'btn-disabled' : 'bg-[#FB2C36]'} w-full`}
               disabled={loading}
             >
               {loading ? 'Creating Task...' : 'Add Task'}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Pie, Bar } from 'react-chartjs-2';
 import {
@@ -11,6 +11,7 @@ import {
   BarElement,
 } from 'chart.js';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { AuthContext } from '../Provider/Provider';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
@@ -21,19 +22,40 @@ const DbData = () => {
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const {user} = useContext(AuthContext); // Access user from AuthContext
 
   // Fetch tasks and FAQs on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        setError(null);
+
+        // Fetch tasks
         const tasksResponse = await axiosSecure.get('/tasks');
-        setTasks(tasksResponse.data);
+        // Handle 404 as empty data
+        const tasksData = tasksResponse.data && Array.isArray(tasksResponse.data) ? tasksResponse.data : [];
+        setTasks(tasksData);
+
+        // Fetch FAQs
         const faqsResponse = await axiosSecure.get('/interview-faqs');
-        setFaqs(faqsResponse.data);
+        const faqsData = faqsResponse.data && Array.isArray(faqsResponse.data) ? faqsResponse.data : [];
+        setFaqs(faqsData);
       } catch (err) {
-        setError('Failed to load data. Please try again.');
-        console.error('Error fetching data:', err);
+        // Handle non-404 errors
+        if (err.response?.status === 404) {
+          // Treat 404 as empty data
+          setTasks([]);
+          setFaqs([]);
+        } else {
+          const errorMessage = err.response
+            ? `Server error: ${err.response.status} - ${err.response.data.message || 'Unknown error'}`
+            : err.message || 'Failed to connect to the server. Please check your network or try again later.';
+          setError(errorMessage);
+          console.error('Error fetching data:', err);
+          setTasks([]);
+          setFaqs([]);
+        }
       } finally {
         setLoading(false);
       }
@@ -103,7 +125,15 @@ const DbData = () => {
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-xl text-red-500">{error}</div>
+        <div className="text-xl text-red-500">
+          {error}
+          <button
+            onClick={() => window.location.reload()}
+            className="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
@@ -181,7 +211,7 @@ const DbData = () => {
             </div>
           </div>
         ) : (
-          <p className="mt-4 text-gray-400">No tasks found.</p>
+          <p className="mt-4 text-gray-400">No tasks found. Start by adding a task!</p>
         )}
       </div>
 
@@ -237,7 +267,7 @@ const DbData = () => {
             ))}
           </div>
         ) : (
-          <p className="text-gray-400">No FAQs found.</p>
+          <p className="text-gray-400">No FAQs found. Start by adding an FAQ!</p>
         )}
         {faqs.length > 3 && (
           <Link

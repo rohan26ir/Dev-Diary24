@@ -8,6 +8,7 @@ import { HiUser } from "react-icons/hi2";
 import DashNav from "./Shared/DashNav";
 import DashNavShort from "./Shared/DashNavShort";
 import DbData from "./DbData";
+import AccountPanel from "./AccountPanel/AccountPanel";
 
 const Dashboard = () => {
   const [isShortNav, setIsShortNav] = useState(false);
@@ -39,12 +40,7 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col">
         {/* Header with Toggle */}
         <div className="bg-black border-b-[1px] sticky top-0 border-white/20 px-4 flex justify-between items-center">
-          <Link
-            to="/"
-            className="text-xl font-bold text-[#C9232B] md:hidden"
-          >
-            Dashboard
-          </Link>
+          
           <div className="flex justify-between items-center h-10 w-[100%]">
             {/* start */}
             <div>
@@ -78,7 +74,7 @@ const Dashboard = () => {
             <div className="bg-black w-72 min-h-full p-4">
               <div className="flex justify-between items-center mb-6">
                 <Link to="/" className="text-2xl font-bold text-blue-400">
-                  Dashboard
+                  DevDiary24
                 </Link>
                 <label
                   htmlFor="my-drawer"
@@ -94,7 +90,7 @@ const Dashboard = () => {
 
         {/* Content Area */}
         <div className="flex-1 overflow-y-auto bg-black">
-          {isDashboardRoute ? <DbData /> : <Outlet />}
+          {isDashboardRoute ? <AccountPanel></AccountPanel> : <Outlet />}
         </div>
       </div>
     </div>

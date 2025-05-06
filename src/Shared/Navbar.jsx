@@ -54,7 +54,7 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-      <li>
+      {/* <li>
         <NavLink
           to={'/note'}
           className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
@@ -80,7 +80,7 @@ const Navbar = () => {
           >
             Lists
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to={'/InterviewFAQs'}
@@ -144,11 +144,11 @@ const Navbar = () => {
                   <li>
                     <a className="justify-between">
                       Profile
-                      <span className="badge">New</span>
+                      <span className="badge ">New</span>
                     </a>
                   </li>
                   <li>
-                    <NavLink to={'/dashboard/AddTask'} className="pl-2.5">
+                    <NavLink to={'/dashboard'} className="pl-2.5">
                       Dashboard
                     </NavLink>
                   </li>
@@ -189,16 +189,15 @@ const Navbar = () => {
           <ul className="flex flex-col w-full items-center gap-4 text-white py-4">
             {navBar}
             {user ? (
-              <ul className="flex flex-col items-center gap-4 mt-4">
+              <ul className="flex flex-col items-center gap-4 mt-4  border-t-[1px] border-white/80 pt-4">
                 <li>
                   <a className="justify-between text-white">
                     Profile
-                    <span className="badge">New</span>
                   </a>
                 </li>
                 <li>
                   <NavLink
-                    to={'/dashboard/AddTask'}
+                    to={'/dashboard'}
                     className="pl-2.5 text-white"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
