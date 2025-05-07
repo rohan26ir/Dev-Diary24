@@ -5,7 +5,7 @@ import assignment from "../../../assets/Home/assignment.svg"
 const HomeWork = () => {
   return (
     <div>
-      <div>
+      <div className='w-11/12 mx-auto'> 
 
 
         <div className='flex flex-col md:flex-row'>

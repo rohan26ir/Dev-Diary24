@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Filter from "../../components/Custom/Filter";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../Provider/Provider";
+import Loading from "../../Shared/Loading";
 
 const InterviewFAQ = () => {
   const axiosSecure = useAxiosSecure();
@@ -104,7 +105,7 @@ const InterviewFAQ = () => {
       />
 
       {/* Display Loading State */}
-      {loading && <p className="text-center text-gray-300">Loading FAQs...</p>}
+      {loading && <Loading></Loading>}
 
       {/* Display filtered FAQs */}
       {filteredFaqs.map(
