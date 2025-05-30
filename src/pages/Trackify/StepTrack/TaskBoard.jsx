@@ -156,11 +156,11 @@ const TaskBoard = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">My Tasks</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">My Tasks Track</h2>
         {loading && <Loading></Loading>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-rose-600">
             {['To-Do', 'In Progress', 'Done'].map((category) => (
               <TaskColumn
                 key={category}

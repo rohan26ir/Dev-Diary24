@@ -81,11 +81,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "/Trackify",
-        element: <Trackify></Trackify>
+        element: <PrivateRoute><Trackify></Trackify></PrivateRoute>
       },
       {
         path: "/Trackify/Addtask",
-        element: <PostTask></PostTask>
+        element: <PrivateRoute><PostTask></PostTask></PrivateRoute>
       },
       {
         path: "/code",

@@ -86,9 +86,8 @@ const PostTask = () => {
         </form>
 
         <div className='py-3 flex flex-col justify-center'>
-          <p className='py-1.5 text-sm text-center'>GO Back Home</p>
-          <Link to={'/'}>
-            <button className='btn w-full'>Click</button>
+          <Link to={'/Trackify'}>
+            <button className='btn bg-black text-white w-full'>Back</button>
           </Link>
         </div>
       </div>

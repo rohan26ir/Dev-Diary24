@@ -50,9 +50,11 @@ const Navbar = () => {
             className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Dev FAQ
+            My FAQ
           </NavLink>
         </li>
+
+        
       )}
       <li>
         <NavLink
@@ -87,7 +89,7 @@ const Navbar = () => {
             className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            DevFAQs
+            PubFAQs
           </NavLink>
         </li>
         <li>
