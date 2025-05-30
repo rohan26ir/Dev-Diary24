@@ -9,6 +9,7 @@ import {
 } from 'chart.js';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../Provider/Provider';
+import Loading from '../../Shared/Loading';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -106,7 +107,7 @@ const TasksOverview = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-xl">Loading Tasks...</div>
+        <Loading></Loading>
       </div>
     );
   }

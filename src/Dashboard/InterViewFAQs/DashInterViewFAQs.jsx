@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import Loading from "../../Shared/Loading";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/Provider";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const DashInterViewFAQs = () => {
   const axiosPublic = useAxiosPublic();
@@ -182,12 +183,12 @@ const DashInterViewFAQs = () => {
                   <td className="p-2 hidden sm:table-cell">{faq.category}</td>
                   <td className="p-2 hidden md:table-cell">{faq.mode}</td>
                   <td className="p-2 hidden md:table-cell">{faq.visibility}</td>
-                  <td className="p-2 flex flex-col sm:flex-row gap-2">
-                    <button className="text-[#FB2C36]" onClick={() => handleEdit(faq)}>
+                  <td className="p-2 flex flex-col sm:flex-row gap-5 ">
+                    <button className="text-white/60 hover:text-[#FB2C36] cursor-pointer" onClick={() => handleEdit(faq)}>
                       Edit
                     </button>
-                    <button className="text-[#FB2C36]" onClick={() => handleDelete(faq._id)}>
-                      Delete
+                    <button className="text-[#FB2C36] hover:text-white/60 cursor-pointer" onClick={() => handleDelete(faq._id)}>
+                    <MdOutlineDeleteOutline />
                     </button>
                   </td>
                 </tr>
@@ -209,7 +210,7 @@ const DashInterViewFAQs = () => {
           <textarea
             value={selectedFaq?.answer || ""}
             onChange={(e) => setSelectedFaq({ ...selectedFaq, answer: e.target.value })}
-            className="w-full p-2 mb-2 border border-gray-300 bg-black text-white text-sm sm:text-base"
+            className="w-full h-60 p-2 mb-2 border border-gray-300 bg-black text-white text-sm sm:text-base"
           ></textarea>
           <select
             value={selectedFaq?.category || ""}

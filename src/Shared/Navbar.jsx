@@ -54,16 +54,16 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-      {/* <li>
+      <li>
         <NavLink
-          to={'/note'}
+          to={'/Trackify'}
           className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          Note
+          Trackify
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink
             to={'/code'}
             className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
@@ -71,8 +71,8 @@ const Navbar = () => {
           >
             Code
           </NavLink>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <NavLink
             to={'/link'}
             className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}

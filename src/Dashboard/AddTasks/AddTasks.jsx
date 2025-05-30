@@ -83,9 +83,9 @@ const AddTasks = () => {
   };
 
   return (
-    <div className=''>
+    <div className='bg-white/10 p-5'>
       <div className="max-w-3xl mx-auto p-6">
-        <h2 className="text-2xl font-bold mb-6">Add New Task</h2>
+        <h2 className="text-2xl text-center text-gray-200 font-bold mb-6">Create New Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
 
 
@@ -98,7 +98,7 @@ const AddTasks = () => {
               name="name"
               value={taskData.name}
               onChange={handleInputChange}
-              className="input input-bordered w-full text-black"
+              className="input input-bordered w-full bg-black text-white"
               required
             />
           </div>
@@ -109,7 +109,7 @@ const AddTasks = () => {
               name="status"
               value={taskData.status}
               onChange={handleInputChange}
-              className="select select-bordered w-full text-black"
+              className="select select-bordered w-full bg-black text-white"
               required
             >
               <option value="">Select Status</option>
@@ -128,7 +128,7 @@ const AddTasks = () => {
               name="subject"
               value={taskData.subject}
               onChange={handleInputChange}
-              className="input input-bordered w-full  text-black"
+              className="input input-bordered w-full  bg-black text-white"
               required
             />
           </div> */}
@@ -141,7 +141,7 @@ const AddTasks = () => {
               name="title"
               value={taskData.title}
               onChange={handleInputChange}
-              className="input input-bordered w-full text-black"
+              className="input input-bordered w-full bg-black text-white"
               required
             />
           </div>
@@ -153,7 +153,7 @@ const AddTasks = () => {
               name="description"
               value={taskData.description}
               onChange={handleInputChange}
-              className="textarea textarea-bordered w-full text-black"
+              className="textarea textarea-bordered w-full bg-black text-white"
               required
             />
           </div>
@@ -167,7 +167,7 @@ const AddTasks = () => {
               name="startDateTime"
               value={taskData.startDateTime}
               onChange={handleInputChange}
-              className="input input-bordered w-full text-black"
+              className="input input-bordered w-full bg-white/5 text-white"
               required
             />
           </div>
@@ -180,7 +180,7 @@ const AddTasks = () => {
               name="endDateTime"
               value={taskData.endDateTime}
               onChange={handleInputChange}
-              className="input input-bordered w-full text-black"
+              className="input input-bordered  w-full bg-white/5 text-white"
               required
             />
           </div>
@@ -194,7 +194,7 @@ const AddTasks = () => {
               name="url"
               value={taskData.url}
               onChange={handleInputChange}
-              className="input input-bordered w-full text-black"
+              className="input input-bordered w-full bg-black text-white"
             />
           </div>
 
@@ -203,7 +203,7 @@ const AddTasks = () => {
           <div className="form-control mt-4 text-black">
             <button
               type="submit"
-              className={`px-3 py-2 rounded-lg cursor-pointer ${loading ? 'btn-disabled' : 'bg-[#FB2C36]'} w-full`}
+              className={`px-3 py-2 rounded-lg text-white font-bold cursor-pointer ${loading ? 'btn-disabled' : 'bg-[#FB2C36]'} w-full`}
               disabled={loading}
             >
               {loading ? 'Creating Task...' : 'Add Task'}

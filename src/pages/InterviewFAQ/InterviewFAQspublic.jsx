@@ -149,6 +149,7 @@ const InterviewFAQ = () => {
           </p>
           <p className="text-xs text-gray-400 mt-2">
             Posted: {selectedFaq && new Date(selectedFaq.timestamp).toLocaleString()}
+            {" "} | Written by: <span className="text-[#FB2C36]">{selectedFaq?.email?.split('@')[0] || 'Unknown'}</span>
           </p>
           <div className="modal-action">
             <form method="dialog">

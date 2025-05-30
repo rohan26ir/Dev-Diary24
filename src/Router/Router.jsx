@@ -23,6 +23,8 @@ import DashInterViewFAQs from "../Dashboard/InterViewFAQs/DashInterViewFAQs";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import AiInterview from "../pages/Ai/AiInterview/AiInterview";
+import Trackify from "../pages/Trackify/Trackify";
+import PostTask from "../pages/Trackify/StepTrack/ForTrack/PostTask";
 
 
 const Router = createBrowserRouter([
@@ -78,8 +80,12 @@ const Router = createBrowserRouter([
         element: <Theory></Theory>
       },
       {
-        path: "/note",
-        element: <NotesPage></NotesPage>
+        path: "/Trackify",
+        element: <Trackify></Trackify>
+      },
+      {
+        path: "/Trackify/Addtask",
+        element: <PostTask></PostTask>
       },
       {
         path: "/code",
