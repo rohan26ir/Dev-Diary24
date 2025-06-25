@@ -8,29 +8,50 @@ import { AuthContext } from "../../Provider/Provider";
 
 const ShowTasks = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useContext(AuthContext); // Access user from AuthContext
+  const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
   const [selectedTask, setSelectedTask] = useState(null);
+  const [remainingTimes, setRemainingTimes] = useState({}); // Store remaining times for each task
 
   useEffect(() => {
-    // Check if user is authenticated
     if (!user) {
       setError("Please log in to view tasks.");
       return;
     }
 
     fetchTasks();
-    const interval = setInterval(fetchTasks, 30000); // Fetch every 30 seconds
+    const interval = setInterval(fetchTasks, 30000); // Fetch tasks every 30 seconds
     return () => clearInterval(interval);
   }, [user]);
 
+  useEffect(() => {
+    // Update remaining time every second
+    const timer = setInterval(() => {
+      setRemainingTimes((prev) => {
+        const updatedTimes = {};
+        tasks.forEach((task) => {
+          updatedTimes[task._id] = calculateRemainingTime(task.endDateTime);
+        });
+        return updatedTimes;
+      });
+    }, 1000); // Update every second
+
+    return () => clearInterval(timer); // Cleanup interval on component unmount
+  }, [tasks]);
+
   const fetchTasks = async () => {
     try {
-      const res = await axiosSecure.get("/tasks"); // No need for withCredentials
+      const res = await axiosSecure.get("/tasks");
       const filteredTasks = res.data.filter((task) => task.remove !== "Yes");
       setTasks(filteredTasks);
       setError("");
+      // Initialize remaining times for newly fetched tasks
+      const initialTimes = {};
+      filteredTasks.forEach((task) => {
+        initialTimes[task._id] = calculateRemainingTime(task.endDateTime);
+      });
+      setRemainingTimes(initialTimes);
     } catch (error) {
       console.error("Error fetching tasks:", error);
       setError("Failed to fetch tasks. Please try again later.");
@@ -41,8 +62,11 @@ const ShowTasks = () => {
     try {
       await axiosSecure.patch(`/tasks/${taskId}/status`, { status: newStatus });
       setTasks((prevTasks) =>
-        prevTasks.map((task) => (task._id === taskId ? { ...task, status: newStatus } : task))
+        prevTasks.map((task) =>
+          task._id === taskId ? { ...task, status: newStatus } : task
+        )
       );
+      toast.success("Task status updated successfully!");
     } catch (error) {
       console.error("Error updating status:", error);
       toast.error("Failed to update task status.");
@@ -53,6 +77,11 @@ const ShowTasks = () => {
     try {
       await axiosSecure.patch(`/tasks/${taskId}/remove`, {});
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
+      setRemainingTimes((prev) => {
+        const updated = { ...prev };
+        delete updated[taskId]; // Remove timer for deleted task
+        return updated;
+      });
       toast.success("Task removed successfully!");
     } catch (error) {
       console.error("Error removing task:", error);
@@ -64,7 +93,19 @@ const ShowTasks = () => {
     const now = moment();
     const end = moment(endDateTime);
     const duration = moment.duration(end.diff(now));
-    return `${duration.days()}d ${duration.hours()}h ${duration.minutes()}m ${duration.seconds()}s`;
+
+    if (duration.asSeconds() <= 0) {
+      return { expired: true, display: "Expired" };
+    }
+
+    const days = Math.floor(duration.asDays());
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+    const seconds = duration.seconds();
+    return {
+      expired: false,
+      display: `${days}d ${hours}h ${minutes}m ${seconds}s`,
+    };
   };
 
   const openModal = (task) => {
@@ -113,8 +154,14 @@ const ShowTasks = () => {
                     </h4>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-[#FB2C36] text-lg px-4 py-2 bg-white/10 rounded-lg">
-                      {calculateRemainingTime(task.endDateTime)}
+                    <p
+                      className={`font-semibold text-lg px-4 py-2 rounded-lg ${
+                        remainingTimes[task._id]?.expired
+                          ? "text-red-500 bg-red-500/10"
+                          : "text-[#FB2C36] bg-white/10"
+                      }`}
+                    >
+                      {remainingTimes[task._id]?.display || "Calculating..."}
                     </p>
                   </div>
                 </div>

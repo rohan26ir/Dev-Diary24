@@ -97,7 +97,7 @@ const TaskBoard = () => {
   };
 
   const deleteTask = async (id) => {
-    console.log('Deleting task with ID:', id);
+    // console.log('Deleting task with ID:', id);
     setError(null);
     const previousTrack = [...track];
     try {
@@ -151,7 +151,7 @@ const TaskBoard = () => {
     }
   };
 
-  console.log('track', track);
+  // console.log('track', track);
 
   return (
     <DndProvider backend={HTML5Backend}>

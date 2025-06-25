@@ -101,8 +101,8 @@ const AiInterview = () => {
   const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY || 'your-vapi-public-key-here';
 
   useEffect(() => {
-    console.log('Vite env:', import.meta.env);
-    console.log('VAPI_PUBLIC_KEY:', VAPI_PUBLIC_KEY);
+    // console.log('Vite env:', import.meta.env);
+    // console.log('VAPI_PUBLIC_KEY:', VAPI_PUBLIC_KEY);
 
     if (!VAPI_PUBLIC_KEY || VAPI_PUBLIC_KEY.includes('your-vapi-public-key-here')) {
       setError('VAPI public key is missing or invalid. Please set VITE_VAPI_PUBLIC_KEY in .env.local.');
@@ -111,23 +111,23 @@ const AiInterview = () => {
 
     try {
       vapiRef.current = new Vapi(VAPI_PUBLIC_KEY);
-      console.log('VAPI initialized:', vapiRef.current);
+      // console.log('VAPI initialized:', vapiRef.current);
 
       vapiRef.current.on('call-start', () => {
         setCallStatus('active');
         setShowCallUI(true);
         setError(null);
-        console.log('Interview started');
+        // console.log('Interview started');
       });
 
       vapiRef.current.on('call-end', () => {
         setCallStatus('idle');
         setShowCallUI(false);
-        console.log('Interview ended');
+        // console.log('Interview ended');
       });
 
       vapiRef.current.on('transcript', (data) => {
-        console.log('Transcript data:', data);
+        // console.log('Transcript data:', data);
         const entry = {
           speaker: data.role === 'assistant' ? 'AI' : data.speaker || 'User',
           text: data.transcript || data.text || 'No text available',
@@ -143,7 +143,7 @@ const AiInterview = () => {
       });
 
       vapiRef.current.on('message', (message) => {
-        console.log('Message data:', message);
+        // console.log('Message data:', message);
         if (message.type === 'assistant-response' && message.data?.score) {
           setScore(message.data.score);
           setFeedback(message.data.feedback || 'No specific feedback provided.');

@@ -31,19 +31,36 @@ const SignUp = () => {
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const formData = new FormData();
-      formData.append("photoURL", file);
+      // Check file size (2MB limit)
+      if (file.size > 2 * 1024 * 1024) {
+        setError("File size must be less than 2MB");
+        return;
+      }
+
+      const imageFormData = new FormData();
+      imageFormData.append("image", file); // ImgBB expects 'image' not 'photoURL'
 
       try {
-        const response = await axiosPublic.post(imageHostingAPI, formData, {
+        const response = await axiosPublic.post(imageHostingAPI, imageFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        setImage(response.data.data.url); // Set the uploaded image URL
+        
+        if (response.data.success) {
+          setImage(response.data.data.url); // Set the uploaded image URL
+          setError(""); // Clear any previous errors
+          // console.log("Image uploaded successfully:", response.data.data.url);
+        } else {
+          setError("Failed to upload image: " + response.data.error.message);
+        }
       } catch (err) {
         console.error("Image Upload Error:", err);
-        setError("Failed to upload image");
+        if (err.response?.data?.error?.message) {
+          setError(`Image upload failed: ${err.response.data.error.message}`);
+        } else {
+          setError("Failed to upload image. Please try again.");
+        }
       }
     }
   };
@@ -54,9 +71,9 @@ const SignUp = () => {
     setError("");
     setSuccessMessage("");
 
-    const { email ,name, password } = formData;
+    const { email, name, password } = formData;
 
-    if (!name || !email || !password || !photoURL) {
+    if (!name || !email || !password || !image) { // Changed from photoURL to image
       setError("All fields are required!");
       return;
     }
@@ -64,20 +81,20 @@ const SignUp = () => {
     // Firebase Authentication Signup
     try {
       const result = await createNewUser(email, password);
-      console.log("Firebase Signup Success:", result.user);
+      // console.log("Firebase Signup Success:", result.user);
 
       // Prepare user data
       const userInfo = {
         email,
         name,
-        photoURL, // Include image URL in the user data
+        photoURL: image, // Use the uploaded image URL
       };
 
       // console.log("userInfo", userInfo);
 
       // Send user data to the backend
       const res = await axiosPublic.post("/users", userInfo);
-      console.log("User saved in DB:", res.data);
+      // console.log("User saved in DB:", res.data);
 
       // Success message and redirect after successful signup
       setSuccessMessage("Account created successfully!");
@@ -91,35 +108,42 @@ const SignUp = () => {
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit} className="px-2">
+        <form onSubmit={handleSubmit} className="px-2 ">
           {/* Name */}
-          <fieldset className="fieldset">
+          <fieldset className="fieldset ">
             <legend className="fieldset-legend text-white">What is your name?</legend>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="input"
+              className="input w-full"
               placeholder="Type here"
             />
           </fieldset>
 
           {/* Image Upload */}
-          <fieldset className="fieldset">
+          <fieldset className="fieldset ">
             <legend className="fieldset-legend text-white">Pick an image</legend>
             <input
               type="file"
-              className="file-input"
+              className="file-input w-full"
               onChange={handleImageChange}
+              accept="image/*"
             />
             <label className="fieldset-label text-white">Max size 2MB</label>
+            {image && (
+              <div className="mt-2">
+                <img src={image} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                <p className="text-green-500 text-sm">Image uploaded successfully</p>
+              </div>
+            )}
           </fieldset>
 
           {/* Email */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend text-white">What is your email?</legend>
-            <label className="input validator">
+            <label className="input validator w-full">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +175,7 @@ const SignUp = () => {
           {/* Password */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend text-white">What is your password?</legend>
-            <label className="input validator">
+            <label className="input validator w-full">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"

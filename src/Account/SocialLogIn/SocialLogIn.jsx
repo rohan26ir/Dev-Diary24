@@ -14,7 +14,7 @@ const SocialLogIn = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
-                console.log('Google Sign-In Result:', result.user);
+                // console.log('Google Sign-In Result:', result.user);
 
                 // Show toast if user data exists
                 if (result.user) {
@@ -40,11 +40,11 @@ const SocialLogIn = () => {
                     photoURL: result.user?.photoURL
                 };
 
-                console.log('Sending User Info:', userInfo);
+                // console.log('Sending User Info:', userInfo);
 
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log('Response from Backend:', res.data);
+                        // console.log('Response from Backend:', res.data);
                     })
                     .catch(error => console.error('Axios Error:', error.response?.data || error.message));
             })

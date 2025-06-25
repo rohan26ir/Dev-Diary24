@@ -23,7 +23,7 @@ const SignIn = () => {
 
     logIn(email, password)
       .then((userCredential) => {
-        console.log('User signed in:', userCredential.user);
+        // console.log('User signed in:', userCredential.user);
         setError('');
         navigate('/');
       })
@@ -52,11 +52,11 @@ const SignIn = () => {
   return (
     <div>
       <div>
-        <form onSubmit={handleSignIn} className="px-2">
+        <form onSubmit={handleSignIn} className="px-2 ">
           {/* Email */}
-          <fieldset className="fieldset">
+          <fieldset className="fieldset ">
             <legend className="fieldset-legend text-white">What is your mail?</legend>
-            <label className="input validator">
+            <label className="input validator  w-full">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,6 +77,7 @@ const SignIn = () => {
                 type="email"
                 name="email"
                 placeholder="mail@site.com"
+                className='w-[300%] '
                 required
                 aria-describedby="email-hint"
               />
@@ -89,7 +90,7 @@ const SignIn = () => {
           {/* Password */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend text-white">What is your Password?</legend>
-            <label className="input validator">
+            <label className="input validator w-full">
               <svg
                 className="h-[1em] opacity-50"
                 xmlns="http://www.w3.org/2000/svg"

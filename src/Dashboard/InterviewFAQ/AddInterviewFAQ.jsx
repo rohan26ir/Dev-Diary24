@@ -55,11 +55,11 @@ const AddInterviewFAQ = () => {
 
         const faq = { email, visibility, mode, category, question, answer, timestamp };
 
-        console.log("Submitting FAQ:", faq);
+        // console.log("Submitting FAQ:", faq);
 
         axiosSecure.post("/addInterviewFAQ", faq)
             .then((data) => {
-                console.log("Server Response:", data);
+                // console.log("Server Response:", data);
                 if (data.data.insertedId) {
                     Swal.fire({
                         title: "Success!",

@@ -75,9 +75,9 @@ const TaskBoard = () => {
     }
   };
 
-  console.log('track:', track);
-  console.log('deleteTrack:', deleteTrack);
-  console.log('updateTrack:', updateTrack);
+  // console.log('track:', track);
+  // console.log('deleteTrack:', deleteTrack);
+  // console.log('updateTrack:', updateTrack);
 
   // Categorizing tasks
   const toDoTrack = track.filter((track) => track.category === 'To-Do');

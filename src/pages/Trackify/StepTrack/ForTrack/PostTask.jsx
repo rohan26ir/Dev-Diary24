@@ -36,7 +36,7 @@ const PostTask = () => {
         userEmail: user.email,
       });
 
-      console.log('Track added:', response.data);
+      // console.log('Track added:', response.data);
       setTrack({ title: '', description: '', category: 'To-Do' }); // Reset form
       navigate('/Trackify');
     } catch (error) {

@@ -5,7 +5,7 @@ import { AuthContext } from "../Provider/Provider";
 
 const axiosSecure = axios.create({
     baseURL: 'https://devdiary-server.vercel.app',
-    withCredentials: true, // Add this to support cookies or sessions
+    withCredentials: true,
 });
 
 const useAxiosSecure = () => {
@@ -15,25 +15,27 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.request.use(
         (config) => {
             const token = localStorage.getItem('access-token');
-                console.log("token", localStorage.getItem('access-token'));
-
+            // console.log("Token found:", !!token); // Better logging
+            
             if (token) {
-                config.headers.authorization = `Bearer ${token}`;
+                // Use capitalized Authorization header
+                config.headers.Authorization = `Bearer ${token}`;
             }
             return config;
         },
         (error) => Promise.reject(error)
     );
 
-    console.log("token", localStorage.getItem('access-token'));
-
     axiosSecure.interceptors.response.use(
         (response) => response,
         async (error) => {
+            console.error("Axios response error:", error.response?.status, error.message);
+            
             const status = error.response?.status;
             if (status === 401 || status === 403) {
+                // console.log("Authentication failed, logging out...");
                 await logOut();
-                navigate('/Account/SignIn'); // Assuming '/login' is your login route
+                navigate('/Account/SignIn');
             }
             return Promise.reject(error);
         }
