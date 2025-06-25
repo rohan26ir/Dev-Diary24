@@ -7,8 +7,8 @@ import FooterImg from "../assets/diary.png"
 
 const Footer = () => {
   return (
-    <div className=''>
-      <div className='border-t-[1px] border-gray-800'>
+    <div className='border-t-[1px] border-gray-800'>
+      <div className='w-11/12 container mx-auto'>
 
         <div className='flex flex-col md:flex-row justify-between items-center p-5'>
           

@@ -4,7 +4,7 @@ import ImagReal from "../../../assets/aboutus/imagineReal.svg"
 
 const ImagineIsReal = () => {
   return (
-    <div>
+    <div className='w-11/12 container mx-auto my-5 space-y-10'>
 
     <div className='hidden md:block lg:hidden space-y-2'>
         <p className="font-bold text-white/40 text-center">Imagine is real!</p>

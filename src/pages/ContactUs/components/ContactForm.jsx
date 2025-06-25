@@ -17,11 +17,11 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center pb-6 w-11/12 mx-auto">
+    <div className="flex items-center justify-center w-11/12 mx-auto h-full">
       <form
         action=""
         onSubmit={handleForm}
-        className="relative w-96 bg-white/20 p-8 rounded-lg shadow-lg overflow-hidden"
+        className="relative w-full h-full bg-white/20 p-8 rounded-lg shadow-lg overflow-hidden"
       >
         {/* Decorative background element */}
         <div className="absolute -left-36 bottom-8 w-80 h-80 bg-white/20 rotate-45 rounded-3xl shadow-md z-0"></div>
@@ -83,7 +83,7 @@ const ContactForm = () => {
             id="message"
             placeholder="Message"
             rows="4"
-            className="w-full pl-10 pr-3 py-2 text-sm text-white   bg-black border-b-2 border-white/20 focus:border-black outline-none transition-colors resize-none"
+            className="w-full pl-10 pr-3 py-2 text-sm text-white min-h-40 rounded-lg bg-black border-b-2 border-white/20 focus:border-black outline-none transition-colors resize-none"
             required
           ></textarea>
         </div>

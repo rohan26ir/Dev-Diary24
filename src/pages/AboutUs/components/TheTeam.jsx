@@ -14,7 +14,7 @@ const TheTeam = () => {
     { id: 5, image: teamP5, name: "Rohan", role: "Full Stack Developer" },
   ];
   return (
-    <div>
+    <div className="w-11/12 container mx-auto my-5 space-y-10">
 
     <div className='block lg:hidden space-y-2'>
         <p className="font-bold text-white/40 text-center">The Team</p>

@@ -5,11 +5,11 @@ import assignment from "../../../assets/Home/assignment.svg"
 const HomeWork = () => {
   return (
     <div>
-      <div className='w-11/12 mx-auto'> 
+      <div className='w-11/12 container mx-auto'> 
 
 
         <div className='flex flex-col md:flex-row'>
-          <div className='w-[100%] flex justify-center items-center'>
+          <div className='w-[100%] flex justify-between items-center'>
             <img 
             src={assignment} 
             className='h-80'

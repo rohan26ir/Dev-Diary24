@@ -29,7 +29,7 @@ const Hero = () => {
 
   return (
     <div className='py-5 bg-black/95  '>
-      <div className='w-11/12 mx-auto '>
+      <div className='w-11/12 mx-auto container'>
 
         <div className='flex flex-col-reverse lg:flex-row'>
           <div className='flex-auto space-y-5 max-w-[100%] '>

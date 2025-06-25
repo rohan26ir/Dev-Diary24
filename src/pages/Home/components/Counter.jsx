@@ -46,7 +46,7 @@ const Counter = () => {
         background: 'linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 255, 255, 0.2) 60%, rgba(255, 255, 255, 0.1) 80%, rgba(255, 255, 255, 0.1) 100%)',
       }}
     >
-      <div className='w-11/12 mx-auto'>
+      <div className='w-11/12 mx-auto container'>
         <Swiper
           spaceBetween={16}
           slidesPerView={1} // Default for mobile

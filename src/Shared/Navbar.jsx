@@ -114,8 +114,8 @@ const Navbar = () => {
     );
 
   return (
-    <div className="">
-      <div className="navbar shadow-sm px-5 border-b-[1px] border-gray-700 bg-black">
+    <div className="border-b-[1px] border-gray-700 bg-black">
+      <div className="navbar container mx-auto shadow-sm px-5 ">
         {/* Navbar Start */}
         <div className="navbar-start flex items-center">
           <Link to={"/"} className="text-xl font-bold text-[#C70039] md:text-white">

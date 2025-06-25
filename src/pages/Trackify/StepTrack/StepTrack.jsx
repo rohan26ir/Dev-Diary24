@@ -3,7 +3,7 @@ import TaskBoard from './TaskBoard';
 
 const StepTrack = () => {
   return (
-    <div>
+    <div className='w-11/12 container mx-auto'>
       <TaskBoard></TaskBoard>
     </div>
   );

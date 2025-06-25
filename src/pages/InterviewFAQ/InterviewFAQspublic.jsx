@@ -137,13 +137,13 @@ const InterviewFAQ = () => {
       )}
 
       {/* DaisyUI Modal */}
-      <dialog id="faq_modal" className="modal">
-        <div className="modal-box bg-black text-white border border-[#FB2C36]">
-          <h3 className="font-bold text-xl text-[#FB2C36] mb-4">{selectedFaq?.question}</h3>
+      <dialog id="faq_modal" className="modal ">
+        <div className="modal-box max-w-[70%] bg-black text-white border border-[#FB2C36]">
+          <h3 className="font-bold text-xl text-[#FB2C36] mb-4">Question:{" "}{selectedFaq?.question}</h3>
           <p className="text-white mb-2">
             {selectedFaq ? renderAnswerWithLineBreaks(selectedFaq.answer) : ""}
           </p>
-          <p className="text-sm text-gray-300">
+          <p className="text-sm text-gray-300 pt-6">
             Category: <span className="text-[#FB2C36]">{selectedFaq?.category}</span> | Mode:{" "}
             <span className="text-[#FB2C36]">{selectedFaq?.mode}</span>
           </p>
@@ -153,7 +153,7 @@ const InterviewFAQ = () => {
           </p>
           <div className="modal-action">
             <form method="dialog">
-              <button className="px-3 py-1 rounded-lg bg-[#FB2C36] text-white border-none hover:bg-white hover:text-black">
+              <button className="px-3 py-1 rounded-lg bg-[#FB2C36] text-white border-none hover:bg-white hover:text-black cursor-pointer">
                 Close
               </button>
             </form>

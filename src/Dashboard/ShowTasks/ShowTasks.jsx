@@ -120,7 +120,7 @@ const ShowTasks = () => {
   }, {});
 
   return (
-    <div className="w-11/12 mx-auto text-white bg-black">
+    <div className="w-11/12 container mx-auto text-white bg-black">
       {error && <p className="text-[#FB2C36] text-center mb-4">{error}</p>}
 
       {Object.entries(groupedTasks).map(([status, tasks]) => (

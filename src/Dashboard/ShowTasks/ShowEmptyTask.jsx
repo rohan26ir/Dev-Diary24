@@ -11,7 +11,7 @@ const ShowEmptyTask = () => {
   
   return (
     <div>
-      <div className='w-11/12 mx-auto py-2 text-white'>
+      <div className='w-11/12 container mx-auto py-2 text-white'>
 
         <div className='flex flex-col-reverse md:flex-row gap-2 w-[100%]'>
           {/* 1st */}

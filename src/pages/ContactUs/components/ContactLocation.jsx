@@ -18,7 +18,7 @@ const customIcon = new L.DivIcon({
 
 const ContactLocation = () => {
   return (
-    <div className='h-[390px] w-[90%] lg:w-[80%] pb-6 mx-auto' >
+    <div className='h-full w-[90%] lg:w-[100%] mx-auto rounded-r-lg overflow-hidden' >
       <MapContainer
         center={[23.6850, 90.3563]}
         zoom={7}

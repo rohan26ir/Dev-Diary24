@@ -7,7 +7,7 @@ import spider from '../../../assets/images/spider-net-sm.png';
 const Support = () => {
   return (
     <div className='bg-white/5 overflow-hidden py-3 md:py-0'>
-      <div className="w-11/12 mx-auto ">
+      <div className="w-11/12 container mx-auto ">
         <div className="flex flex-col md:flex-row justify-around items-center gap-4 md:gap-8">
 
           {/* 1st */}

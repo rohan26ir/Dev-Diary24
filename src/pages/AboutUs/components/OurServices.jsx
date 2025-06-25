@@ -54,7 +54,7 @@ const OurServices = () => {
   ];
 
   return (
-    <div className="">
+    <div className="container mx-auto">
       <h2 className="text-6xl md:text-8xl text-white/80 font-bold text-center">Our Services</h2>
       <div className="flex justify-center mb-10">
         <p className="max-w-2xl md:max-w-3xl text-center text-white/70">
