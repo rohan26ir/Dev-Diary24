@@ -4,6 +4,8 @@ import { AuthContext } from '../../../Provider/Provider';
 import { Link, useNavigate } from 'react-router-dom';
 import HeroCard from './HeroCard';
 
+import robot from '../../../assets/Home/robot.gif'
+
 const Hero = () => {
   const {user} = useContext(AuthContext);
   const navigate = useNavigate();
@@ -39,7 +41,9 @@ const Hero = () => {
             <p className='text-lg max-w-lg'>Dev Diary24 is your all-in-one digital workspace. Take daily notes, manage personal and work-related tasks, track deadlines, and store essential FAQs effortlessly. Stay organized and boost your productivity like never before.</p>
 
             {user 
-             ? <Link to={'/ai-Interview'}><button className='bg-[#FB2C36] px-3 py-2 rounded-lg cursor-pointer font-bold'>Ai Mock Interview</button></Link>  
+             ? <Link to={'/ai-Interview'}>
+              <button className='bg-[#FB2C36] px-3 py-0.5 rounded-lg cursor-pointer font-bold flex items-center justify-center ring-2 ring-white/40'><img src={robot} className='h-10 w-fit' alt="" /> Ai Mock Interview</button>
+             </Link>  
              : <Link to={'/Account/SignIn'}><button className='bg-[#FB2C36] px-3 py-2 rounded-lg cursor-pointer font-bold'>Sign Up</button></Link>
           }
 

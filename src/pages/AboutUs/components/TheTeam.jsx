@@ -16,8 +16,10 @@ const TheTeam = () => {
   return (
     <div className="w-11/12 container mx-auto my-5 space-y-10">
 
-    <div className='block lg:hidden space-y-2'>
-        <p className="font-bold text-white/40 text-center">The Team</p>
+    <div className='block lg:hidden space-y-2 '>
+        <div className="flex justify-center items-center">
+          <p className="inline font-bold text-black text-center bg-amber-500 px-2 ">The Team</p>
+        </div>
         <h2 className="text-4xl text-white/80 mb-2 font-bold text-center">
         Our creative team
         </h2>
@@ -56,7 +58,7 @@ const TheTeam = () => {
       {/* text section */}
       <div className="space-y-2 w-full lg:w-1/2 my-auto">
         <div className="hidden lg:block">
-         <p className="font-bold text-white/40 w-fit">The Team</p>
+         <p className="font-bold text-black w-fit  bg-amber-500 px-2">The Team</p>
          <h2 className="text-6xl text-white/80 leading-14 font-bold max-w-md ">
           Our creative team
         </h2>

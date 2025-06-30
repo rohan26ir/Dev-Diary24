@@ -1,25 +1,36 @@
 import React from 'react';
 
 import assignment from "../../../assets/Home/assignment.svg"
+import animationAssignment from '/public/Animation - assignment.json';
+import Lottie from 'lottie-react';
 
 const HomeWork = () => {
   return (
-    <div>
+    <div className='pb-10'>
       <div className='w-11/12 container mx-auto'> 
 
 
-        <div className='flex flex-col md:flex-row'>
-          <div className='w-[100%] flex justify-between items-center'>
-            <img 
+        <div className='flex flex-col md:flex-row-reverse justify-between items-center py-0'>
+          <div className='w-[100%] pb-10 md:pb-0'>
+            {/* <img 
             src={assignment} 
             className='h-80'
-            alt="Assignment" />
+            alt="Assignment" /> */}
+
+            <Lottie 
+            animationData={animationAssignment} 
+            loop={true}
+            className='h-80'
+            />
+
           </div>
 
 
-          <div className="w-[100%] space-y-1 bg-black z-30">
-              <p className="text-white/35 font-bold">Assignments</p>
+          <div className="w-[100%] space-y-5 bg-black z-30">
+              <div>
+                <p className="inline-block font-bold bg-amber-500 text-black px-2">Assignments</p>
               <h2 className="text-xl md:text-2xl text-white font-bold">Mastering Homework: Tips & Tricks for Success</h2>
+              </div>
               <p className="text-sm md:text-base text-white/80">
               Homework is an essential part of learning, helping students reinforce concepts and develop critical thinking skills. Stay organized, manage your time effectively, and tackle assignments with confidence!
               </p>

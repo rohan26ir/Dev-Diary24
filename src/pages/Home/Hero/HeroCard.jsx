@@ -6,6 +6,8 @@ import timeManagement from "../../../assets/timeManagement.svg";
 import { MdAccessTime } from "react-icons/md";
 import { BsPersonWorkspace } from "react-icons/bs";
 import HeroCards from "../../../components/marquee/HeroCards";
+import Lottie from "lottie-react";
+import animationTimeManagement from '/public/Animation - time management.json';
 
 const HeroCard = () => {
   return (
@@ -15,7 +17,7 @@ const HeroCard = () => {
 
 
           {/* 1st card */}
-          <div className="bg-white w-52 h-64 rounded-lg p-3 space-y-1  ">
+          <div className="bg-white w-52 h-72 rounded-lg p-3 space-y-1  ">
               {/* img */}
               <img src={timeManagement} alt="" />
               {/* text */}
@@ -32,7 +34,7 @@ const HeroCard = () => {
 
 
           {/* 2nd card */}
-            <div className="bg-[#FFAE13] w-56 text-black h-72 rounded-lg p-3 space-y-1  absolute z-10  shadow-5xl shadow-black">
+            <div className="bg-[#FFAE13] w-56 text-black h-72 rounded-lg p-3 space-y-1  absolute z-10  shadow-2xl shadow-black">
 
               <p className="bg-[#FF6B00] w-fit mx-auto px-2 text-center rounded-3xl">View Task</p>
               <h2 className="font-bold text-center">
@@ -44,11 +46,16 @@ const HeroCard = () => {
             </div>
 
           {/* 3rd card */}
-            <div className="bg-white w-52 h-64 rounded-lg p-3 space-y-1">
+            <div className="bg-white w-56 h-72 rounded-lg p-3 space-y-1">
               {/* img */}
-              <img src={timeManagement} alt="" />
+              {/* <img src={timeManagement} alt="" /> */}
+              <Lottie 
+              animationData={animationTimeManagement}  
+              loop={true}
+              className=""
+              />
               {/* text */}
-              <div className="flex justify-around items-center">
+              <div className="flex justify-end items-center">
                 <div>
                   <h2 className="text-black font-semibold">Time Management</h2>
                   <p className="text-gray-600">Efficient Task Control</p>
