@@ -35,20 +35,18 @@ const Hero = () => {
 
         <div className='flex flex-col-reverse lg:flex-row'>
           <div className='flex-auto space-y-5 max-w-[100%] '>
-            <h3 className='text-3xl font-bold text-white/40'>Productivity</h3>
-            <h2 className='text-4xl font-bold text-white md:max-w-xl lg:max-w-sm'>Your Personal and Work Life, All in One Place</h2>
-
+            <h3 className='text-2xl -mb-2 inline-block font-bold bg-amber-500 text-black px-2'>Productivity</h3>
+            <h2 className='text-4xl font-bold text-white md:max-w-xl lg:max-w-md'>Your Personal and Work Life, All in One Place</h2>
             <p className='text-lg max-w-lg'>Dev Diary24 is your all-in-one digital workspace. Take daily notes, manage personal and work-related tasks, track deadlines, and store essential FAQs effortlessly. Stay organized and boost your productivity like never before.</p>
 
-            {user 
-             ? <Link to={'/ai-Interview'}>
-              <button className='bg-[#FB2C36] px-3 py-0.5 rounded-lg cursor-pointer font-bold flex items-center justify-center ring-2 ring-white/40'><img src={robot} className='h-10 w-fit' alt="" /> Ai Mock Interview</button>
-             </Link>  
-             : <Link to={'/Account/SignIn'}><button className='bg-[#FB2C36] px-3 py-2 rounded-lg cursor-pointer font-bold'>Sign Up</button></Link>
-          }
+            <div className='inline-block rounded-lg'>
+              <Link to={'/ai-Interview'}>
+              <button className='bg-[#FB2C36] pr-3 py-0.5 cursor-pointer font-bold flex items-center justify-center ring-2 ring-white/40'><img src={robot} className='h-10 w-fit' alt="" />Ai Mock Interview</button>
+             </Link>
+            </div>
 
 
-            <p onClick={handleLearn} className=' text-gray-400 w-fit rounded-3xl flex items-center gap-1 cursor-pointer mt-10'><FaArrowDownLong />Learn more DevDiary24</p>
+            <p onClick={handleLearn} className=' text-gray-400 w-fit rounded-3xl flex items-center gap-1 cursor-pointer'><span className='animate-bounce'><FaArrowDownLong /></span> Learn more DevDiary24</p>
 
           </div>
           {/* img */}

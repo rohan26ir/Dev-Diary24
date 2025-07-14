@@ -17,7 +17,7 @@ const ShowEmptyTask = () => {
           {/* 1st */}
           <div className='w-[100%] md:w-[30%]'>
             <div>
-              <p className='font-bold text-white/30'>Task</p>
+              <p className="inline-block font-bold bg-amber-500 text-black px-2">Task</p>
               <h2 className='text-2xl font-bold'>See Task Time and Date</h2>
               <p>Easily track tasks with start times, deadlines, and real-time updates to stay organized and productive!</p>
             </div>

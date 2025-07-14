@@ -21,48 +21,40 @@ const HeroCard = () => {
               {/* img */}
               <img src={timeManagement} alt="" />
               {/* text */}
-              <div className="flex justify-around items-center">
+              <div className="flex justify-start items-end pt-3 ">
                 <div>
-                  <h2 className="text-black font-semibold">Time Management</h2>
-                  <p className="text-gray-600">Efficient Task Control</p>
-                </div>
-                <div className="text-black text-2xl ">
-                  <MdAccessTime />
+                  <h2 className="text-black font-semibold">Beat the Clock</h2>
+                  <p className="text-gray-600">Smart Time Control</p>
                 </div>
               </div>
             </div>
 
 
           {/* 2nd card */}
-            <div className="bg-[#FFAE13] w-56 text-black h-72 rounded-lg p-3 space-y-1  absolute z-10  shadow-2xl shadow-black">
+            <div className="bg-lime-200 w-56 text-black h-72 pt-10 p-3 space-y-1  absolute z-10  shadow-2xl shadow-black">
 
-              <p className="bg-[#FF6B00] w-fit mx-auto px-2 text-center rounded-3xl">View Task</p>
-              <h2 className="font-bold text-center">
-                Add Your <br />
-                Task/Assignment
-              </h2>
-
-              <img src={heroTask} alt="" />
-            </div>
-
-          {/* 3rd card */}
-            <div className="bg-white w-56 h-72 rounded-lg p-3 space-y-1">
-              {/* img */}
-              {/* <img src={timeManagement} alt="" /> */}
+              <div className="flex flex-col justify-end items-center text-center">
+                 <h2 className="text-black font-semibold">Balance Your Work</h2>
+                 <p className="text-gray-600">Effective Task Flow</p>
+              </div>
               <Lottie 
               animationData={animationTimeManagement}  
               loop={true}
               className=""
               />
-              {/* text */}
-              <div className="flex justify-end items-center">
+            </div>
+
+          {/* 3rd card */}
+            <div className="bg-white w-56 h-72 rounded-lg p-3 space-y-1">
+              <img src={heroTask} alt="Plan and Execute" />
+              <div className="flex justify-center items-end">
                 <div>
-                  <h2 className="text-black font-semibold">Time Management</h2>
-                  <p className="text-gray-600">Efficient Task Control</p>
+                  <h2 className="text-black font-semibold">Add Your Task</h2>
+                  <p className="text-gray-600">Plan and Execute</p>
                 </div>
-                <div className="text-black text-2xl ">
+                {/* <div className="text-black text-2xl ">
                   <MdAccessTime />
-                </div>
+                </div> */}
               </div>
             </div>
 

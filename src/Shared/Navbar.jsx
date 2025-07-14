@@ -10,7 +10,7 @@ const Navbar = () => {
   const menuRef = useRef(null); // Reference to the mobile menu container
 
   // Define activeStyle
-  const activeStyle = "bg-white/20 text-white px-3 py-2 rounded";
+  const activeStyle = "text-lime-400 px-3 py-2 rounded";
 
   // Toggle mobile menu
   const toggleMobileMenu = (e) => {
@@ -65,24 +65,6 @@ const Navbar = () => {
           Trackify
         </NavLink>
       </li>
-      {/* <li>
-        <NavLink
-            to={'/code'}
-            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Code
-          </NavLink>
-        </li> */}
-        {/* <li>
-          <NavLink
-            to={'/link'}
-            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Lists
-          </NavLink>
-        </li> */}
         <li>
           <NavLink
             to={'/InterviewFAQs'}
@@ -114,7 +96,7 @@ const Navbar = () => {
     );
 
   return (
-    <div className="border-b-[1px] border-gray-700 bg-black">
+    <div className="border-b-[1px] border-gray-700 bg-black/5">
       <div className="navbar container mx-auto shadow-sm px-5 ">
         {/* Navbar Start */}
         <div className="navbar-start flex items-center">
