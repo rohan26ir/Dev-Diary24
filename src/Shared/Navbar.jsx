@@ -92,6 +92,15 @@ const Navbar = () => {
             Contact
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to={'/more-tools'}
+            className={({ isActive }) => (isActive ? activeStyle : "px-3 py-2 text-white")}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            More
+          </NavLink>
+        </li>
       </>
     );
 

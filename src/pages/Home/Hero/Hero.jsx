@@ -46,7 +46,7 @@ const Hero = () => {
             </div>
 
 
-            <p onClick={handleLearn} className=' text-gray-400 w-fit rounded-3xl flex items-center gap-1 cursor-pointer'><span className='animate-bounce'><FaArrowDownLong /></span> Learn more DevDiary24</p>
+            <p onClick={handleLearn} className=' text-gray-400 w-fit rounded-3xl flex items-center gap-1 cursor-pointer'><span className='animate-bounce'><FaArrowDownLong /></span> Learn more <span className='hover:text-lime-500'>DevDiary24</span></p>
 
           </div>
           {/* img */}

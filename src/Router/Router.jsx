@@ -25,6 +25,7 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import AiInterview from "../pages/Ai/AiInterview/AiInterview";
 import Trackify from "../pages/Trackify/Trackify";
 import PostTask from "../pages/Trackify/StepTrack/ForTrack/PostTask";
+import PageMore from "../pages/MorePages/Page/PageMore";
 
 
 const Router = createBrowserRouter([
@@ -58,6 +59,10 @@ const Router = createBrowserRouter([
             element: <SignUp></SignUp>
           },
         ]
+      },
+      {
+        path: "/more-tools",
+        element: <PageMore></PageMore>
       },
       {
         path: "/my-InterviewFAQ",
